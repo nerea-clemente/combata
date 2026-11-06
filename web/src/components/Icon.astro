@@ -1,0 +1,16 @@
+---
+/** Iconos funcionales mínimos (navegación, carrito, formularios). Sin iconografía decorativa. */
+interface Props { name: 'arrow' | 'cart' | 'menu' | 'close' | 'plus' | 'minus' | 'check' | 'alert'; class?: string }
+const { name, class: cls } = Astro.props;
+const paths: Record<Props['name'], string> = {
+  arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  cart: '<path d="M3 4h2.2l2.1 11.2a1.5 1.5 0 0 0 1.5 1.3h8.6a1.5 1.5 0 0 0 1.5-1.2L20.5 8H6.2"/><circle cx="9.5" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/>',
+  menu: '<path d="M4 8h16M4 16h16"/>',
+  close: '<path d="M6 6l12 12M18 6L6 18"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  minus: '<path d="M5 12h14"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  alert: '<circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/>',
+};
+---
+<svg class:list={[name, cls]} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" set:html={paths[name]} />

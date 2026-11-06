@@ -1,0 +1,105 @@
+---
+import Icon from './Icon.astro';
+---
+<dialog class="drawer" data-drawer aria-labelledby="drawer-title">
+  <div class="drawer__inner">
+    <div class="drawer__head">
+      <h2 id="drawer-title" class="h-3">Tu carrito</h2>
+      <button type="button" class="drawer__close" data-drawer-close aria-label="Cerrar carrito"><Icon name="close" /></button>
+    </div>
+    <div class="drawer__body" data-drawer-lines></div>
+    <div class="drawer__foot" data-drawer-foot>
+      <div class="drawer__row"><span>Subtotal</span><strong data-drawer-subtotal></strong></div>
+      <p class="small muted">Gastos de envío e impuestos: <span class="pending">por confirmar</span></p>
+      <button type="button" class="btn btn-primary btn-block" disabled aria-describedby="checkout-note">Finalizar compra</button>
+      <p id="checkout-note" class="small muted">La compra online todavía no está activa. Estamos configurando la tienda y el pago seguro.</p>
+      <a class="link-arrow small" href="/carrito">Ver carrito completo</a>
+    </div>
+  </div>
+</dialog>
+<div class="toasts" data-toast aria-live="polite"></div>
+
+<style is:global>
+  .drawer {
+    margin: 0 0 0 auto; height: 100dvh; max-height: 100dvh; width: min(440px, 100vw); max-width: 100vw;
+    border: 0; padding: 0; background: var(--color-cream); color: var(--color-purple);
+  }
+  .drawer::backdrop { background: rgba(26, 11, 61, .45); }
+  .drawer[open] { animation: drawer-in .3s var(--ease); }
+  @keyframes drawer-in { from { transform: translateX(100%); } }
+  .drawer__inner { display: flex; flex-direction: column; height: 100%; }
+  .drawer__head { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--color-line); }
+  .drawer__close { width: 44px; height: 44px; border: 0; background: none; border-radius: 50%; display: grid; place-items: center; }
+  .drawer__close:hover { background: rgba(26,11,61,.07); }
+  .drawer__close svg { width: 22px; height: 22px; }
+  .drawer__body { flex: 1; overflow-y: auto; padding: .5rem 1.5rem; }
+  .drawer__foot { padding: 1.25rem 1.5rem 1.5rem; border-top: 1px solid var(--color-line); display: grid; gap: .75rem; }
+  .drawer__foot[hidden] { display: none; }
+  .drawer__row { display: flex; justify-content: space-between; font-size: var(--step-1); }
+
+  .cart-empty { display: grid; gap: .75rem; justify-items: start; padding: 2rem 0; }
+  .cart-lines { display: grid; }
+  .cart-line { display: grid; grid-template-columns: 64px 1fr auto; gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--color-line); align-items: start; }
+  .cart-line__thumb { width: 64px; height: 64px; border-radius: var(--radius-s); background: var(--color-sand); display: grid; place-items: center; }
+  .cart-swatch { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--color-purple); }
+  .cart-line__name { font-weight: 600; }
+  .cart-line__meta { font-size: var(--step--1); color: var(--color-muted); margin-bottom: .6rem; }
+  .cart-line__side { text-align: right; display: grid; gap: .5rem; justify-items: end; }
+  .cart-line__price { font-weight: 600; }
+  .cart-line__remove { background: none; border: 0; padding: .25rem 0; font-size: var(--step--1); text-decoration: underline; color: var(--color-muted); }
+  .cart-line__remove:hover { color: var(--color-purple); }
+
+  .qty { display: inline-flex; align-items: center; border: 1.5px solid var(--color-purple); border-radius: var(--radius-s); }
+  .qty button { width: 44px; height: 44px; border: 0; background: none; font-size: 1.25rem; line-height: 1; }
+  .qty button:hover:not(:disabled) { background: rgba(26,11,61,.07); }
+  .qty button:disabled { opacity: .3; cursor: not-allowed; }
+  .qty output, .qty input { min-width: 2.5rem; text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .qty input { width: 3rem; border: 0; background: none; -moz-appearance: textfield; appearance: textfield; }
+  .qty input::-webkit-outer-spin-button, .qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .qty--s button { width: 36px; height: 36px; font-size: 1.05rem; }
+
+  .toasts { position: fixed; z-index: 200; left: 50%; bottom: 1.25rem; transform: translateX(-50%); display: grid; gap: .5rem; width: min(92vw, 420px); pointer-events: none; }
+  .toast {
+    pointer-events: auto; padding: .9rem 1.1rem; border-radius: var(--radius); font-weight: 500;
+    background: var(--color-purple); color: var(--color-cream); box-shadow: 0 10px 30px rgba(26,11,61,.25);
+    border-left: 6px solid var(--color-lime); animation: toast-in .3s var(--ease);
+    transition: opacity .4s, transform .4s;
+  }
+  .toast--error { border-left-color: var(--color-pink); }
+  .toast.is-out { opacity: 0; transform: translateY(8px); }
+  @keyframes toast-in { from { opacity: 0; transform: translateY(10px); } }
+</style>
+
+<script>
+  import { renderLines, bindLineControls, count, subtotalLabel, getLines, toast } from '../scripts/cart';
+  const drawer = document.querySelector<HTMLDialogElement>('[data-drawer]')!;
+  const linesEl = drawer.querySelector<HTMLElement>('[data-drawer-lines]')!;
+  const foot = drawer.querySelector<HTMLElement>('[data-drawer-foot]')!;
+  const sub = drawer.querySelector<HTMLElement>('[data-drawer-subtotal]')!;
+  let opener: HTMLElement | null = null;
+
+  const update = () => {
+    const n = count();
+    document.querySelectorAll<HTMLElement>('[data-cart-count]').forEach((b) => {
+      b.textContent = String(n);
+      b.hidden = n === 0;
+    });
+    document.querySelectorAll<HTMLElement>('[data-cart-open]').forEach((b) =>
+      b.setAttribute('aria-label', n ? `Abrir carrito, ${n} ${n === 1 ? 'producto' : 'productos'}` : 'Abrir carrito'));
+    renderLines(linesEl);
+    foot.hidden = getLines().length === 0;
+    const s = subtotalLabel();
+    sub.innerHTML = s ?? '<span class="pending">Por confirmar</span>';
+  };
+  update();
+  document.addEventListener('cart:change', update);
+  window.addEventListener('storage', update);
+  bindLineControls(linesEl, (m) => toast(m));
+
+  document.querySelectorAll<HTMLElement>('[data-cart-open]').forEach((b) =>
+    b.addEventListener('click', () => { opener = b; drawer.showModal(); }));
+  document.addEventListener('cart:open', () => { opener = document.activeElement as HTMLElement; drawer.showModal(); });
+  drawer.querySelector('[data-drawer-close]')!.addEventListener('click', () => drawer.close());
+  drawer.addEventListener('click', (e) => { if (e.target === drawer) drawer.close(); });
+  drawer.addEventListener('close', () => opener?.focus());
+</script>

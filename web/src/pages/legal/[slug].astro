@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import { legal } from '../../data/site';
+export function getStaticPaths() {
+  return legal.map((l) => ({ params: { slug: l.slug }, props: { label: l.label } }));
+}
+const { label } = Astro.props;
+---
+<Base title={`${label} | Combata`} description={`${label} de Combata.`} noindex>
+  <section class="container legal">
+    <nav class="breadcrumb" aria-label="Ruta de navegación"><ol><li><a href="/">Inicio</a></li><li aria-current="page">{label}</li></ol></nav>
+    <h1 class="h-1">{label}</h1>
+    <div class="legal__notice">
+      <p><strong>Contenido pendiente.</strong> Este texto debe redactarse con asesoramiento legal y con los datos reales de la empresa antes de publicar la web.</p>
+    </div>
+  </section>
+</Base>
+<style>
+  .legal { padding-block: clamp(2rem, 4vw, 3.5rem) var(--section); display: grid; gap: 1.5rem; max-width: 52rem; margin-inline: auto; }
+  .legal__notice { padding: 1.25rem 1.5rem; border: 1.5px dashed rgba(26,11,61,.4); border-radius: var(--radius); background: var(--color-paper); }
+</style>

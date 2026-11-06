@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Página no encontrada | Combata" description="No encontramos esta página." noindex>
+  <section class="container nf">
+    <img src="/brand/nube_gafas_simple.svg" alt="" width="180" height="122" />
+    <h1 class="h-1">Esta página no está en el plan.</h1>
+    <p class="lead muted">Puede que el enlace haya cambiado o ya no exista.</p>
+    <div class="btn-row"><a class="btn btn-primary" href="/">Ir al inicio</a><a class="btn btn-secondary" href="/comprar">Comprar</a></div>
+  </section>
+</Base>
+<style>
+  .nf { padding-block: var(--section); display: grid; gap: 1.5rem; justify-items: start; }
+  .nf img { width: 150px; }
+</style>

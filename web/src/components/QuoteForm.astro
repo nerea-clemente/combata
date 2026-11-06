@@ -1,0 +1,153 @@
+---
+import { site, SHOW_PENDING } from '../data/site';
+import Icon from './Icon.astro';
+const configured = Boolean(site.quoteEndpoint);
+const today = new Date().toISOString().slice(0, 10);
+---
+<form class="quote" data-quote novalidate data-endpoint={site.quoteEndpoint ?? ''}>
+  <div class="quote__grid">
+    <div class="field">
+      <label for="q-name">Nombre</label>
+      <input class="input" id="q-name" name="nombre" autocomplete="name" required aria-describedby="q-name-err" />
+      <p class="field-error" id="q-name-err"></p>
+    </div>
+    <div class="field">
+      <label for="q-org">Empresa u organización <span class="opt">(opcional)</span></label>
+      <input class="input" id="q-org" name="organizacion" autocomplete="organization" />
+    </div>
+    <div class="field">
+      <label for="q-email">Email</label>
+      <input class="input" id="q-email" name="email" type="email" autocomplete="email" required aria-describedby="q-email-err" />
+      <p class="field-error" id="q-email-err"></p>
+    </div>
+    <div class="field">
+      <label for="q-type">Tipo de evento</label>
+      <select class="input" id="q-type" name="tipo_evento" required aria-describedby="q-type-err">
+        <option value="">Elige una opción</option>
+        <option>Boda o celebración</option>
+        <option>Festival</option>
+        <option>Universidad</option>
+        <option>Local de ocio</option>
+        <option>Marca o agencia</option>
+        <option>Institución</option>
+        <option>Otro</option>
+      </select>
+      <p class="field-error" id="q-type-err"></p>
+    </div>
+    <div class="field">
+      <label for="q-qty">Cantidad estimada</label>
+      <input class="input" id="q-qty" name="cantidad" type="number" inputmode="numeric" min="1" step="1" required aria-describedby="q-qty-hint q-qty-err" />
+      <p class="hint" id="q-qty-hint">Un número aproximado nos basta.</p>
+      <p class="field-error" id="q-qty-err"></p>
+    </div>
+    <div class="field">
+      <label for="q-date">Fecha del evento <span class="opt">(si ya la tienes)</span></label>
+      <input class="input" id="q-date" name="fecha_evento" type="date" min={today} />
+    </div>
+    <div class="field quote__full">
+      <label for="q-desc">Cuéntanos tu idea</label>
+      <textarea class="input" id="q-desc" name="descripcion" required aria-describedby="q-desc-hint q-desc-err"></textarea>
+      <p class="hint" id="q-desc-hint">Qué quieres personalizar (logo, diseño o mensaje), colores, dónde se va a usar… Si tienes el logo, podrás enviárnoslo después por email.</p>
+      <p class="field-error" id="q-desc-err"></p>
+    </div>
+    <div class="quote__hp" aria-hidden="true">
+      <label for="q-web">No rellenes este campo</label>
+      <input id="q-web" name="web" tabindex="-1" autocomplete="off" />
+    </div>
+    <div class="field quote__full">
+      <label class="check">
+        <input type="checkbox" name="privacidad" required aria-describedby="q-priv-err" />
+        <span>He leído y acepto la <a href="/legal/privacidad">política de privacidad</a>.</span>
+      </label>
+      <p class="field-error" id="q-priv-err"></p>
+    </div>
+  </div>
+  <div class="quote__submit">
+    <button type="submit" class="btn btn-primary">Solicitar presupuesto <Icon name="arrow" /></button>
+    <p class="quote__status" data-quote-status role="status" aria-live="polite"></p>
+  </div>
+  {!configured && SHOW_PENDING && (
+    <p class="small muted quote__dev"><span class="pending">Pendiente</span> El formulario valida los datos, pero aún no tiene un destino configurado (variable <code>PUBLIC_QUOTE_ENDPOINT</code>). Hasta entonces no se envía nada.</p>
+  )}
+</form>
+
+<style>
+  .quote { display: grid; gap: 1.75rem; }
+  .quote__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 1.5rem; }
+  .quote__full { grid-column: 1 / -1; }
+  .quote__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .check { display: flex; gap: .75rem; align-items: flex-start; font-weight: 400 !important; font-size: var(--step-0) !important; cursor: pointer; }
+  .check input { width: 1.35rem; height: 1.35rem; margin-top: .15rem; accent-color: var(--color-purple); flex: none; }
+  .quote__submit { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
+  .quote__status { font-weight: 500; }
+  .quote__status[data-kind='error'] { color: var(--color-error); }
+  .quote__dev code { font-size: .9em; }
+  @media (max-width: 700px) { .quote__grid { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-quote]');
+  if (form) {
+    const status = form.querySelector<HTMLElement>('[data-quote-status]')!;
+    const endpoint = form.dataset.endpoint;
+    const msgs: Record<string, (el: HTMLInputElement) => string> = {
+      nombre: () => 'Escribe tu nombre.',
+      email: (el) => (el.value ? 'Revisa el formato del email.' : 'Escribe tu email.'),
+      tipo_evento: () => 'Elige el tipo de evento.',
+      cantidad: () => 'Indica una cantidad aproximada (un número mayor que 0).',
+      descripcion: () => 'Cuéntanos brevemente tu idea.',
+      privacidad: () => 'Necesitamos que aceptes la política de privacidad para responderte.',
+    };
+    const fields = Array.from(form.querySelectorAll<HTMLInputElement>('[required]'));
+    const check = (el: HTMLInputElement) => {
+      const errEl = document.getElementById(
+        (el.getAttribute('aria-describedby') || '').split(' ').find((id) => id.endsWith('-err')) || '');
+      const ok = el.checkValidity();
+      el.setAttribute('aria-invalid', String(!ok));
+      if (errEl) errEl.textContent = ok ? '' : msgs[el.name]?.(el) ?? 'Revisa este campo.';
+      return ok;
+    };
+    fields.forEach((el) => {
+      el.addEventListener('blur', () => el.value && check(el));
+      el.addEventListener('input', () => el.getAttribute('aria-invalid') === 'true' && check(el));
+      el.addEventListener('change', () => el.getAttribute('aria-invalid') === 'true' && check(el));
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = '';
+      status.removeAttribute('data-kind');
+      const invalid = fields.filter((el) => !check(el));
+      if (invalid.length) {
+        invalid[0].focus();
+        status.dataset.kind = 'error';
+        status.textContent = `Revisa ${invalid.length === 1 ? 'el campo marcado' : `los ${invalid.length} campos marcados`}.`;
+        return;
+      }
+      const data = Object.fromEntries(new FormData(form).entries());
+      if (data.web) return; // honeypot
+      delete data.web;
+      if (!endpoint) {
+        status.dataset.kind = 'error';
+        status.textContent = 'Todo está correcto, pero el envío del formulario aún no está conectado. Tu solicitud no se ha enviado.';
+        return;
+      }
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+      btn.disabled = true;
+      status.textContent = 'Enviando…';
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ ...data, origen: 'combata-custom' }),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        window.location.href = '/custom/gracias';
+      } catch {
+        status.dataset.kind = 'error';
+        status.textContent = 'No hemos podido enviar tu solicitud. Inténtalo de nuevo en unos minutos.';
+        btn.disabled = false;
+      }
+    });
+  }
+</script>

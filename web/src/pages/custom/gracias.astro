@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+---
+<Base title="Solicitud recibida | Combata Custom" description="Hemos recibido tu solicitud de presupuesto." noindex>
+  <section class="container thanks">
+    <p class="eyebrow">Combata Custom</p>
+    <h1 class="h-1">Hemos recibido tu solicitud.</h1>
+    <p class="lead muted">Gracias por contarnos tu idea. La revisamos y te escribimos por email con los siguientes pasos.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="/">Volver al inicio</a>
+      <a class="btn btn-secondary" href="/custom">Combata Custom <Icon name="arrow" /></a>
+    </div>
+  </section>
+</Base>
+<style>
+  .thanks { padding-block: var(--section); display: grid; gap: 1.5rem; justify-items: start; max-width: 52rem; }
+</style>

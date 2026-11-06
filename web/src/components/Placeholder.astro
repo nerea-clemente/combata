@@ -1,0 +1,47 @@
+---
+/**
+ * Placeholder elegante para fotografías que aún no existen.
+ * No simula el producto: indica qué imagen real hay que producir.
+ */
+interface Props {
+  label: string;          // qué foto va aquí
+  note?: string;          // indicación para la sesión de fotos
+  ratio?: string;         // CSS aspect-ratio
+  tone?: 'sand' | 'purple' | 'lavender' | 'paper';
+  class?: string;
+  sticker?: string;       // ruta a un sticker de marca opcional (con moderación)
+}
+const { label, note = 'Imagen pendiente', ratio = '4 / 5', tone = 'sand', class: cls, sticker } = Astro.props;
+---
+<figure class:list={['ph', `ph--${tone}`, cls]} style={`aspect-ratio:${ratio}`}>
+  <div class="ph__frame" role="img" aria-label={`Espacio reservado: ${label}. ${note}.`}>
+    <span class="ph__mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.2"/><path d="M8 5l1.5-2h5L16 5"/></svg>
+    </span>
+    <figcaption class="ph__cap">
+      <span class="ph__label">{label}</span>
+      <span class="ph__note">{note}</span>
+    </figcaption>
+  </div>
+  {sticker && <img class="ph__sticker" src={sticker} alt="" width="120" height="96" loading="lazy" />}
+</figure>
+<style>
+  .ph { position: relative; margin: 0; border-radius: var(--radius-l); overflow: visible; width: 100%; }
+  .ph__frame {
+    position: absolute; inset: 0; border-radius: inherit; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: space-between; padding: clamp(1rem, 2.5vw, 1.75rem);
+    background-image: repeating-linear-gradient(135deg, transparent 0 22px, var(--ph-line) 22px 23px);
+  }
+  .ph__frame::after {
+    content: ''; position: absolute; inset: 12px; border: 1px dashed var(--ph-dash); border-radius: calc(var(--radius-l) - 8px); pointer-events: none;
+  }
+  .ph--sand { background: var(--color-sand); color: var(--color-purple); --ph-line: rgba(26,11,61,.045); --ph-dash: rgba(26,11,61,.25); }
+  .ph--paper { background: var(--color-paper); color: var(--color-purple); --ph-line: rgba(26,11,61,.04); --ph-dash: rgba(26,11,61,.22); }
+  .ph--lavender { background: #DCD3FF; color: var(--color-purple); --ph-line: rgba(26,11,61,.05); --ph-dash: rgba(26,11,61,.25); }
+  .ph--purple { background: #2A1858; color: var(--color-cream); --ph-line: rgba(245,244,238,.05); --ph-dash: rgba(245,244,238,.3); }
+  .ph__mark { width: 2rem; height: 2rem; opacity: .6; position: relative; }
+  .ph__cap { display: grid; gap: .2rem; position: relative; max-width: 30ch; }
+  .ph__label { font-weight: 600; font-size: var(--step--1); letter-spacing: -.005em; }
+  .ph__note { font-size: .75rem; opacity: .7; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
+  .ph__sticker { position: absolute; width: clamp(72px, 9vw, 120px); height: auto; right: -14px; top: -22px; transform: rotate(8deg); }
+</style>

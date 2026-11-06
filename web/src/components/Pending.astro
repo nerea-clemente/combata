@@ -1,0 +1,6 @@
+---
+import { SHOW_PENDING } from '../data/site';
+interface Props { label?: string }
+const { label = 'Pendiente' } = Astro.props;
+---
+{SHOW_PENDING && <span class="pending" title="Información pendiente de confirmar antes de publicar">{label}</span>}

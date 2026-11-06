@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import Pending from '../components/Pending.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+---
+<Base title="Contacto | Combata" description="Contacta con Combata.">
+  <section class="container contact">
+    <h1 class="h-1">Contacto</h1>
+    <div class="contact__grid">
+      <div class="contact__block">
+        <h2 class="h-3">Escríbenos</h2>
+        {site.contact.email
+          ? <a class="contact__big" href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+          : <p class="muted">Muy pronto publicaremos nuestro correo de contacto. <Pending label="Email pendiente" /></p>}
+        {site.contact.phone && <p>{site.contact.phone}</p>}
+      </div>
+      <div class="contact__block">
+        <h2 class="h-3">Pedidos personalizados</h2>
+        <p class="muted">Si quieres Combata para un evento, una marca o una celebración, usa el formulario de presupuesto.</p>
+        <a class="btn btn-primary" href="/custom#presupuesto">Solicitar presupuesto <Icon name="arrow" /></a>
+      </div>
+      <div class="contact__block">
+        <h2 class="h-3">Redes</h2>
+        {site.social.length
+          ? <ul role="list">{site.social.map((s) => <li><a href={s.href} rel="noopener">{s.label}</a></li>)}</ul>
+          : <p class="muted"><Pending label="Perfiles pendientes" /></p>}
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .contact { padding-block: clamp(2.5rem, 5vw, 4.5rem) var(--section); }
+  .contact__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 4vw, 4rem); margin-top: clamp(2rem, 5vw, 4rem); }
+  .contact__block { display: grid; gap: 1rem; align-content: start; justify-items: start; border-top: 1.5px solid var(--color-purple); padding-top: 1.25rem; }
+  .contact__big { font-size: var(--step-2); font-weight: 600; }
+  @media (max-width: 860px) { .contact__grid { grid-template-columns: 1fr; } }
+</style>

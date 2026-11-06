@@ -1,0 +1,271 @@
+---
+import Base from '../../layouts/Base.astro';
+import Placeholder from '../../components/Placeholder.astro';
+import Pending from '../../components/Pending.astro';
+import Icon from '../../components/Icon.astro';
+import FaqList from '../../components/FaqList.astro';
+import { product, formatPrice } from '../../data/site';
+import { faqs } from '../../data/faq';
+
+const price = formatPrice(product.price);
+const gallery = [
+  { label: 'Foto principal de Combata Original sobre fondo limpio', short: 'Principal' },
+  { label: 'Vista de los colores disponibles', short: 'Colores' },
+  { label: 'Detalle del material de silicona y su textura', short: 'Material' },
+  { label: 'Colocación real sobre un vaso', short: 'Colocación' },
+];
+const firstAvailable = product.colours.find((c) => c.available);
+const d = product.details;
+const detailRows: [string, string | null][] = [
+  ['Material', d.material],
+  ['Medidas', d.medidas],
+  ['Compatibilidad', d.compatibilidad],
+  ['Cuidados', d.cuidados],
+  ['Envío', d.envio],
+];
+const productFaqs = faqs.filter((f) => f.group !== 'custom').slice(0, 6);
+---
+<Base
+  title="Combata Original | Protector reutilizable para vasos"
+  description="Combata Original, el protector reutilizable de silicona para tu bebida. Elige tu color y ponle un Combata."
+>
+  <div class="container pdp">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">
+      <ol>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/comprar">Comprar</a></li>
+        <li aria-current="page">Combata Original</li>
+      </ol>
+    </nav>
+
+    <div class="pdp__grid">
+      <!-- Galería -->
+      <section class="gallery" aria-label="Galería de imágenes del producto">
+        <div class="gallery__main">
+          {gallery.map((g, i) => (
+            <div class="gallery__slide" data-slide={i} hidden={i !== 0}>
+              <Placeholder label={g.label} note="Foto de producto pendiente" tone={i === 0 ? 'sand' : 'paper'} ratio="1 / 1" />
+            </div>
+          ))}
+        </div>
+        <div class="gallery__thumbs" role="group" aria-label="Elegir imagen">
+          {gallery.map((g, i) => (
+            <button type="button" class="gallery__thumb" data-thumb={i} aria-pressed={i === 0 ? 'true' : 'false'} aria-label={`Ver imagen: ${g.label}`}>
+              <span>{g.short}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <!-- Panel de compra -->
+      <section class="buy" aria-labelledby="pdp-title">
+        <h1 id="pdp-title" class="h-1">Combata Original</h1>
+        <p class="lead">{product.short}</p>
+
+        <p class="buy__price">
+          {price ? <span>{price}</span> : <><span class="buy__price-pending">Precio por confirmar</span> <Pending label="Precio pendiente" /></>}
+        </p>
+
+        <form class="buy__form" data-buy novalidate>
+          {product.colours.length > 0 && (
+            <fieldset class="field colours">
+              <legend>
+                Color: <span data-colour-name>{firstAvailable?.name}</span>
+                {product.colours.some((c) => c.pendiente) && <Pending label="Colores por confirmar" />}
+              </legend>
+              <div class="colours__list">
+                {product.colours.map((c) => (
+                  <label class="colour" title={c.available ? c.name : `${c.name} (no disponible)`}>
+                    <input type="radio" name="colour" value={c.id} data-name={c.name} checked={c === firstAvailable} disabled={!c.available} />
+                    <span class="colour__dot" style={`--c:${c.hex}`}></span>
+                    <span class="visually-hidden">{c.name}{!c.available && ' — no disponible'}</span>
+                  </label>
+                ))}
+              </div>
+              {product.colours.some((c) => !c.available) && <p class="hint">Los colores tachados no están disponibles ahora mismo.</p>}
+            </fieldset>
+          )}
+
+          {product.packs.length > 0 && (
+            <fieldset class="field packs">
+              <legend>Formato</legend>
+              <div class="packs__list">
+                {product.packs.map((p, i) => (
+                  <label class="pack"><input type="radio" name="pack" value={p.id} checked={i === 0} /><span>{p.label}<br /><small>{formatPrice(p.price)}</small></span></label>
+                ))}
+              </div>
+            </fieldset>
+          )}
+
+          <div class="field">
+            <label for="qty">Cantidad</label>
+            <div class="qty">
+              <button type="button" data-step="-1" aria-label="Quitar una unidad">−</button>
+              <input id="qty" name="qty" type="number" inputmode="numeric" min="1" max={product.maxQty} value="1" />
+              <button type="button" data-step="1" aria-label="Añadir una unidad">+</button>
+            </div>
+          </div>
+
+          <p class="field-error" data-buy-error role="alert"></p>
+          <button type="submit" class="btn btn-primary btn-block buy__cta"><Icon name="cart" /> Añadir al carrito</button>
+          <p class="small muted">La compra online aún no está activa: puedes preparar tu carrito y te avisaremos cuando abramos la tienda. <Pending label="Ecommerce pendiente" /></p>
+        </form>
+
+        <dl class="facts">
+          {detailRows.map(([k, v]) => (
+            <div><dt>{k}</dt><dd>{v ?? <span class="muted">Por confirmar</span>}</dd></div>
+          ))}
+        </dl>
+      </section>
+    </div>
+  </div>
+
+  <section class="section pdp-info" aria-label="Información del producto">
+    <div class="container info-grid">
+      <article id="como-se-utiliza">
+        <p class="index">01</p>
+        <h2 class="h-2">Cómo se utiliza</h2>
+        <p class="muted">Colócalo sobre el vaso, disfruta de tu plan y, al terminar, límpialo para volver a usarlo.</p>
+        <Pending label="Instrucciones y demostración pendientes" />
+      </article>
+      <article>
+        <p class="index">02</p>
+        <h2 class="h-2">Detalles del producto</h2>
+        <p class="muted">Protector flexible de silicona que se coloca sobre el vaso. Añade una barrera física adicional y ayuda a reducir salpicaduras.</p>
+        <Pending label="Medidas y compatibilidad pendientes" />
+      </article>
+      <article>
+        <p class="index">03</p>
+        <h2 class="h-2">Limpieza y cuidados</h2>
+        <p class="muted">Publicaremos las instrucciones de limpieza junto con la ficha técnica del fabricante.</p>
+        <Pending label="Ficha técnica pendiente" />
+      </article>
+    </div>
+    <div class="container safety">
+      <p><strong>Importante:</strong> Combata añade una barrera física sobre el vaso, pero no garantiza que una bebida no pueda ser manipulada ni elimina los riesgos. Es un accesorio complementario, no un sistema de seguridad infalible.</p>
+    </div>
+  </section>
+
+  <section class="section paper" aria-labelledby="pdp-faq">
+    <div class="container pdp-faq">
+      <div>
+        <h2 id="pdp-faq" class="h-2">Preguntas frecuentes</h2>
+        <a class="link-arrow" href="/preguntas-frecuentes">Ver todas <Icon name="arrow" /></a>
+      </div>
+      <FaqList items={productFaqs} />
+    </div>
+  </section>
+
+  <section class="section--tight dark on-dark">
+    <div class="container cross">
+      <div>
+        <p class="eyebrow">Combata Custom</p>
+        <p class="h-2 cross__t">¿Lo quieres con tu logo o diseño?</p>
+      </div>
+      <a class="btn btn-secondary" href="/custom">Ver Combata Custom <Icon name="arrow" /></a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pdp { padding-block: 1.5rem clamp(3rem, 6vw, 5rem); }
+  .pdp__grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(2rem, 5vw, 5rem); margin-top: 1.5rem; align-items: start; }
+  .gallery { display: grid; gap: .75rem; position: sticky; top: calc(var(--header-h) + 1rem); }
+  .gallery__thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; }
+  .gallery__thumb {
+    aspect-ratio: 1; border-radius: var(--radius); border: 1.5px solid transparent; background: var(--color-sand);
+    font-size: var(--step--1); font-weight: 600; color: var(--color-muted); padding: .5rem;
+  }
+  .gallery__thumb:hover { color: var(--color-purple); }
+  .gallery__thumb[aria-pressed='true'] { border-color: var(--color-purple); color: var(--color-purple); background: var(--color-paper); }
+
+  .buy { display: grid; gap: 1.25rem; align-content: start; }
+  .buy .lead { margin-top: -.5rem; }
+  .buy__price { font-size: var(--step-3); font-weight: 700; letter-spacing: -.03em; display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; }
+  .buy__price-pending { font-size: var(--step-2); }
+  .buy__form { display: grid; gap: 1.5rem; padding-block: 1.5rem; border-block: 1px solid var(--color-line); }
+  fieldset { border: 0; padding: 0; min-width: 0; }
+  fieldset legend { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; margin-bottom: .75rem; }
+  .colours__list { display: flex; gap: .75rem; flex-wrap: wrap; }
+  .colour { position: relative; cursor: pointer; }
+  .colour input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: inherit; }
+  .colour__dot {
+    display: block; width: 48px; height: 48px; border-radius: 50%; background: var(--c);
+    border: 1.5px solid var(--color-purple); box-shadow: 0 0 0 3px var(--color-cream), 0 0 0 3px transparent; transition: box-shadow .15s;
+  }
+  .colour input:checked + .colour__dot { box-shadow: 0 0 0 3px var(--color-cream), 0 0 0 5px var(--color-purple); }
+  .colour input:focus-visible + .colour__dot { outline: 3px solid var(--color-purple); outline-offset: 6px; }
+  .colour input:disabled + .colour__dot { opacity: .35; cursor: not-allowed; background-image: linear-gradient(135deg, transparent 47%, var(--color-purple) 47% 53%, transparent 53%); }
+  .packs__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: .6rem; }
+  .pack { position: relative; }
+  .pack input { position: absolute; opacity: 0; }
+  .pack span { display: block; padding: .8rem; border: 1.5px solid var(--color-line); border-radius: var(--radius-s); text-align: center; font-weight: 600; }
+  .pack input:checked + span { border-color: var(--color-purple); background: var(--color-purple); color: var(--color-cream); }
+  .pack input:focus-visible + span { outline: 3px solid var(--color-purple); outline-offset: 3px; }
+  .buy__cta { --h: 3.6rem; font-size: var(--step-1); }
+  .facts { display: grid; }
+  .facts div { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--color-line); font-size: var(--step--1); }
+  .facts dt { font-weight: 600; }
+  .facts dd { margin: 0; }
+
+  .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 4vw, 4rem); }
+  .info-grid article { display: grid; gap: .9rem; align-content: start; justify-items: start; border-top: 1.5px solid var(--color-purple); padding-top: 1.25rem; }
+  .safety { margin-top: clamp(2.5rem, 5vw, 4rem); }
+  .safety p { max-width: 75ch; padding: 1.25rem 1.5rem; border-left: 4px solid var(--color-lime); background: var(--color-paper); border-radius: 0 var(--radius-s) var(--radius-s) 0; }
+  .pdp-faq { display: grid; grid-template-columns: 1fr 2fr; gap: clamp(2rem, 5vw, 5rem); }
+  .pdp-faq > div { display: grid; gap: 1.25rem; align-content: start; justify-items: start; }
+  .cross { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .cross__t { margin-top: .75rem; }
+
+  @media (max-width: 900px) {
+    .pdp__grid, .info-grid, .pdp-faq { grid-template-columns: 1fr; }
+    .gallery { position: static; }
+  }
+</style>
+
+<script>
+  import { addLine, toast } from '../../scripts/cart';
+  import { product } from '../../data/site';
+
+  // Galería
+  const thumbs = document.querySelectorAll<HTMLButtonElement>('[data-thumb]');
+  const slides = document.querySelectorAll<HTMLElement>('[data-slide]');
+  thumbs.forEach((t) => t.addEventListener('click', () => {
+    const i = t.dataset.thumb;
+    thumbs.forEach((x) => x.setAttribute('aria-pressed', String(x === t)));
+    slides.forEach((s) => (s.hidden = s.dataset.slide !== i));
+  }));
+
+  // Compra
+  const form = document.querySelector<HTMLFormElement>('[data-buy]')!;
+  const qty = form.querySelector<HTMLInputElement>('#qty')!;
+  const err = form.querySelector<HTMLElement>('[data-buy-error]')!;
+  const colourName = form.querySelector<HTMLElement>('[data-colour-name]');
+  const clamp = (n: number) => Math.max(1, Math.min(product.maxQty, Math.round(n) || 1));
+  const syncSteppers = () => {
+    form.querySelector<HTMLButtonElement>('[data-step="-1"]')!.disabled = Number(qty.value) <= 1;
+    form.querySelector<HTMLButtonElement>('[data-step="1"]')!.disabled = Number(qty.value) >= product.maxQty;
+  };
+  form.querySelectorAll<HTMLButtonElement>('[data-step]').forEach((b) =>
+    b.addEventListener('click', () => { qty.value = String(clamp(Number(qty.value) + Number(b.dataset.step))); syncSteppers(); }));
+  qty.addEventListener('change', () => { qty.value = String(clamp(Number(qty.value))); syncSteppers(); });
+  syncSteppers();
+  form.querySelectorAll<HTMLInputElement>('input[name="colour"]').forEach((r) =>
+    r.addEventListener('change', () => { if (colourName) colourName.textContent = r.dataset.name || ''; }));
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    err.textContent = '';
+    const colour = form.querySelector<HTMLInputElement>('input[name="colour"]:checked');
+    const pack = form.querySelector<HTMLInputElement>('input[name="pack"]:checked');
+    if (product.colours.length && !colour) { err.textContent = 'Elige un color para continuar.'; return; }
+    try {
+      addLine({ productId: product.id, colourId: colour?.value ?? null, packId: pack?.value ?? null, qty: clamp(Number(qty.value)) });
+      toast(`Añadido al carrito: Combata Original${colour ? ' · ' + colour.dataset.name : ''}`);
+      document.dispatchEvent(new CustomEvent('cart:open'));
+    } catch (ex) {
+      err.textContent = 'No hemos podido añadirlo al carrito. ' + (ex instanceof Error ? ex.message : '');
+      toast('No se ha podido añadir al carrito', 'error');
+    }
+  });
+</script>

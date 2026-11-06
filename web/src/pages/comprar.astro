@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import Placeholder from '../components/Placeholder.astro';
+import Pending from '../components/Pending.astro';
+import Icon from '../components/Icon.astro';
+import { product, formatPrice } from '../data/site';
+const price = formatPrice(product.price);
+---
+<Base title="Comprar | Combata" description="Compra Combata, el protector reutilizable para tu bebida. Elige tu color.">
+  <section class="container shop">
+    <header class="shop__head">
+      <h1 class="h-1">Comprar</h1>
+      <p class="lead muted">El protector reutilizable para tu bebida.</p>
+    </header>
+
+    <a class="card" href={product.href}>
+      <Placeholder label="Combata Original sobre fondo limpio" note="Foto de producto pendiente" tone="sand" ratio="4 / 3" />
+      <div class="card__body">
+        <div>
+          <h2 class="h-2">{product.name}</h2>
+          <p class="muted">{product.short}</p>
+        </div>
+        <div class="card__meta">
+          <p class="card__price">{price ?? <>Precio por confirmar <Pending label="Pendiente" /></>}</p>
+          <div class="card__swatches" aria-label="Colores">
+            {product.colours.map((c) => <span style={`background:${c.hex}`} title={c.name}></span>)}
+          </div>
+          <span class="btn btn-dark">Ver producto <Icon name="arrow" /></span>
+        </div>
+      </div>
+    </a>
+
+    <aside class="shop__custom">
+      <p class="h-3">¿Necesitas unidades personalizadas para un evento o una marca?</p>
+      <a class="link-arrow" href="/custom">Combata Custom <Icon name="arrow" /></a>
+    </aside>
+  </section>
+</Base>
+<style>
+  .shop { padding-block: clamp(2.5rem, 5vw, 4.5rem) var(--section); }
+  .shop__head { display: grid; gap: .75rem; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+  .card { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(1.5rem, 4vw, 4rem); text-decoration: none; align-items: center; }
+  .card__body { display: grid; gap: 2rem; }
+  .card__body .h-2 { margin-bottom: .5rem; }
+  .card:hover .h-2 { text-decoration: underline; text-decoration-color: var(--color-lime); text-decoration-thickness: 4px; text-underline-offset: 6px; }
+  .card__meta { display: grid; gap: 1rem; justify-items: start; }
+  .card__price { font-size: var(--step-2); font-weight: 700; display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
+  .card__swatches { display: flex; gap: .4rem; }
+  .card__swatches span { width: 1.5rem; height: 1.5rem; border-radius: 50%; border: 1.5px solid var(--color-purple); }
+  .shop__custom { margin-top: clamp(3rem, 6vw, 5rem); padding-top: 2rem; border-top: 1px solid var(--color-line); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  @media (max-width: 800px) { .card { grid-template-columns: 1fr; } }
+</style>

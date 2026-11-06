@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import FaqList from '../components/FaqList.astro';
+import Icon from '../components/Icon.astro';
+import { faqs } from '../data/faq';
+const groups = [
+  { id: 'producto', t: 'Producto' },
+  { id: 'compra', t: 'Compra y envíos' },
+  { id: 'custom', t: 'Combata Custom' },
+] as const;
+---
+<Base title="Preguntas frecuentes | Combata" description="Resolvemos tus dudas sobre Combata: qué es, cómo se usa, cómo se limpia y cómo personalizarlo para tu evento.">
+  <section class="container faq-page">
+    <header class="faq-page__head">
+      <h1 class="h-1">Preguntas frecuentes</h1>
+      <nav aria-label="Categorías" class="faq-page__nav">
+        {groups.map((g) => <a href={`#${g.id}`}>{g.t}</a>)}
+      </nav>
+    </header>
+    {groups.map((g) => (
+      <section class="faq-group" id={g.id} aria-labelledby={`h-${g.id}`}>
+        <h2 id={`h-${g.id}`} class="h-2">{g.t}</h2>
+        <FaqList items={faqs.filter((f) => f.group === g.id)} />
+      </section>
+    ))}
+    <aside class="faq-page__more">
+      <p class="h-3">¿No encuentras lo que buscas?</p>
+      <a class="link-arrow" href="/contacto">Escríbenos <Icon name="arrow" /></a>
+    </aside>
+  </section>
+</Base>
+<style>
+  .faq-page { padding-block: clamp(2.5rem, 5vw, 4.5rem) var(--section); }
+  .faq-page__head { display: grid; gap: 1.5rem; margin-bottom: clamp(2rem, 5vw, 4rem); }
+  .faq-page__nav { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .faq-page__nav a { text-decoration: none; padding: .55rem 1rem; border: 1.5px solid var(--color-purple); border-radius: var(--radius-s); font-weight: 600; font-size: var(--step--1); }
+  .faq-page__nav a:hover { background: var(--color-purple); color: var(--color-cream); }
+  .faq-group { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(1.5rem, 5vw, 5rem); padding-block: clamp(2rem, 4vw, 3.5rem); }
+  .faq-page__more { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--color-line); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  @media (max-width: 860px) { .faq-group { grid-template-columns: 1fr; } }
+</style>

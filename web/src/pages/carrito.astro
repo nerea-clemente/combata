@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Carrito | Combata" description="Tu carrito de Combata." noindex>
+  <section class="container cart-page">
+    <h1 class="h-1">Carrito</h1>
+    <div class="cart-page__grid">
+      <div data-cart-page-lines></div>
+      <aside class="summary" data-cart-summary>
+        <h2 class="h-3">Resumen</h2>
+        <div class="summary__row"><span>Subtotal</span><strong data-cart-page-subtotal></strong></div>
+        <div class="summary__row small"><span>Envío</span><span class="pending">Por confirmar</span></div>
+        <button type="button" class="btn btn-primary btn-block" disabled aria-describedby="cp-note">Finalizar compra</button>
+        <p id="cp-note" class="small muted">La compra online todavía no está activa. Estamos configurando la tienda y el pago seguro. Tu carrito se guarda en este navegador.</p>
+      </aside>
+    </div>
+  </section>
+</Base>
+<style>
+  .cart-page { padding-block: clamp(2.5rem, 5vw, 4.5rem) var(--section); }
+  .cart-page__grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(2rem, 5vw, 5rem); margin-top: 2rem; align-items: start; }
+  .summary { display: grid; gap: 1rem; padding: 1.5rem; background: var(--color-paper); border-radius: var(--radius); border: 1px solid var(--color-line); }
+  .summary[hidden] { display: none; }
+  .summary__row { display: flex; justify-content: space-between; gap: 1rem; }
+  @media (max-width: 860px) { .cart-page__grid { grid-template-columns: 1fr; } }
+</style>
+<script>
+  import { renderLines, bindLineControls, subtotalLabel, getLines, toast } from '../scripts/cart';
+  const el = document.querySelector<HTMLElement>('[data-cart-page-lines]')!;
+  const sum = document.querySelector<HTMLElement>('[data-cart-summary]')!;
+  const sub = document.querySelector<HTMLElement>('[data-cart-page-subtotal]')!;
+  const update = () => {
+    renderLines(el);
+    sum.hidden = getLines().length === 0;
+    sub.innerHTML = subtotalLabel() ?? '<span class="pending">Por confirmar</span>';
+  };
+  update();
+  document.addEventListener('cart:change', update);
+  bindLineControls(el, (m) => toast(m));
+</script>

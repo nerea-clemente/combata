@@ -1,0 +1,57 @@
+---
+import { nav, legal, site } from '../data/site';
+import Pending from './Pending.astro';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer dark on-dark">
+  <div class="container">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <img src="/brand/logo_combata_blanco.svg" alt="Combata" width="200" height="41" loading="lazy" />
+        <p class="site-footer__tag">Ponle un Combata.</p>
+      </div>
+      <nav aria-label="Pie de página" class="site-footer__cols">
+        <div>
+          <h2 class="site-footer__h">Combata</h2>
+          <ul role="list">
+            {nav.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
+            <li><a href="/contacto">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="site-footer__h">Legal</h2>
+          <ul role="list">
+            {legal.map((l) => <li><a href={`/legal/${l.slug}`}>{l.label}</a></li>)}
+          </ul>
+        </div>
+        <div>
+          <h2 class="site-footer__h">Contacto</h2>
+          <ul role="list">
+            {site.contact.email ? <li><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></li> : <li><Pending label="Correo pendiente" /></li>}
+            {site.social.length ? site.social.map((s) => <li><a href={s.href} rel="noopener">{s.label}</a></li>) : <li><Pending label="Redes pendientes" /></li>}
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="site-footer__bottom small">
+      <p>© {year} Combata. Combata añade una barrera física adicional; no garantiza la seguridad de una bebida ni sustituye otras precauciones.</p>
+    </div>
+  </div>
+</footer>
+<style>
+  .site-footer { padding-block: clamp(3.5rem, 6vw, 5.5rem) 2rem; }
+  .site-footer__top { display: grid; grid-template-columns: 1.1fr 2fr; gap: 3rem; }
+  .site-footer__brand img { width: clamp(150px, 18vw, 210px); height: auto; }
+  .site-footer__tag { margin-top: 1.25rem; font-size: var(--step-1); font-weight: 600; letter-spacing: -.02em; }
+  .site-footer__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .site-footer__h { font-size: var(--step--1); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--color-lime); margin-bottom: 1rem; }
+  .site-footer ul { display: grid; gap: .6rem; }
+  .site-footer a { text-decoration: none; color: var(--color-on-dark-muted); }
+  .site-footer a:hover { color: var(--color-cream); text-decoration: underline; }
+  .site-footer__bottom { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid rgba(245,244,238,.16); color: var(--color-on-dark-muted); max-width: none; }
+  @media (max-width: 860px) {
+    .site-footer__top { grid-template-columns: 1fr; }
+    .site-footer__cols { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) { .site-footer__cols { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import Pending from '../components/Pending.astro';
+import Icon from '../components/Icon.astro';
+const values = [
+  { t: 'Cuidado sin miedo', d: 'Hablamos de prevención sin alarmismo y sin culpar a nadie.' },
+  { t: 'Divertido, pero en serio', d: 'Podemos tener humor sin tomarnos a la ligera lo que importa.' },
+  { t: 'Simple', d: 'Productos, mensajes y experiencia fáciles de entender.' },
+  { t: 'Con tu estilo', d: 'Colores, personalización y espacio para que cada Combata sea tuyo.' },
+];
+---
+<Base title="Sobre Combata | Accesorios reutilizables para bebidas" description="Que estar pendiente de tu bebida no sea parte del plan. Conoce Combata.">
+  <section class="container ab-hero">
+    <p class="eyebrow">Sobre Combata</p>
+    <h1 class="h-1 ab-hero__title">Que estar pendiente de tu bebida no sea parte del plan.</h1>
+    <div class="ab-hero__body">
+      <p class="lead">En Combata creemos que los accesorios más útiles también pueden tener personalidad. Por eso apostamos por productos reutilizables, fáciles de llevar y pensados para acompañarte en tus planes.</p>
+      <img src="/brand/nube_gafas_simple.svg" alt="" width="220" height="150" class="ab-hero__cloud" />
+    </div>
+  </section>
+
+  <section class="section dark on-dark">
+    <div class="container mv">
+      <div>
+        <p class="index">Misión</p>
+        <p class="h-2">Que disfrutes de tus bebidas con más comodidad, con accesorios útiles, reutilizables y con personalidad.</p>
+      </div>
+      <div>
+        <p class="index">Visión</p>
+        <p class="h-2">Que ponerle un Combata sea algo habitual en fiestas, festivales y celebraciones.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="h-1 vals__title">Lo que nos importa</h2>
+      <ol role="list" class="vals">
+        {values.map((v, i) => (
+          <li class="reveal"><span class="index">{String(i + 1).padStart(2, '0')}</span><h3 class="h-3">{v.t}</h3><p class="muted">{v.d}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section paper">
+    <div class="container story">
+      <h2 class="h-2">Nuestra historia</h2>
+      <div>
+        <p class="muted">Pronto te contaremos quién está detrás de Combata y cómo empezó todo.</p>
+        <Pending label="Historia de las fundadoras pendiente de aprobar" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container end-cta">
+      <p class="h-2">Ponle un Combata.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/productos/combata-original">Comprar <Icon name="arrow" /></a>
+        <a class="btn btn-secondary" href="/custom">Personalizar</a>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .ab-hero { padding-block: clamp(3rem, 6vw, 6rem) var(--section); display: grid; gap: 2rem; }
+  .ab-hero__title { font-size: clamp(2.5rem, 1.4rem + 4.5vw, 5.5rem); max-width: 16ch; letter-spacing: -.045em; }
+  .ab-hero__body { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: end; }
+  .ab-hero__body .lead { max-width: 40ch; }
+  .ab-hero__cloud { width: clamp(130px, 16vw, 220px); }
+  .mv { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 6rem); }
+  .mv > div { display: grid; gap: 1rem; align-content: start; border-top: 1px solid rgba(245,244,238,.25); padding-top: 1.25rem; }
+  .mv .h-2 { font-weight: 600; letter-spacing: -.025em; line-height: 1.2; }
+  .vals__title { margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+  .vals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  .vals li { border-top: 1.5px solid var(--color-purple); padding-top: 1.25rem; display: grid; gap: .6rem; align-content: start; }
+  .story { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 6vw, 6rem); }
+  .story > div { display: grid; gap: 1rem; justify-items: start; }
+  .end-cta { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; padding-block: 1rem; }
+  @media (max-width: 860px) {
+    .ab-hero__body, .mv, .story { grid-template-columns: 1fr; }
+    .vals { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) { .vals { grid-template-columns: 1fr; } }
+</style>

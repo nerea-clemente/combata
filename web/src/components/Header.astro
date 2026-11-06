@@ -1,0 +1,118 @@
+---
+import { nav } from '../data/site';
+import Icon from './Icon.astro';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => path === href || path.startsWith(href + '/') || (href === '/comprar' && path.startsWith('/productos'));
+---
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a href="/" class="site-header__logo" aria-label="Combata, ir al inicio">
+      <img src="/brand/logo_combata_principal.svg" alt="Combata" width="160" height="33" />
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <ul role="list">
+        {nav.map((item) => (
+          <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <button type="button" class="icon-btn" data-cart-open aria-label="Abrir carrito" aria-haspopup="dialog">
+        <Icon name="cart" />
+        <span class="cart-count" data-cart-count hidden>0</span>
+      </button>
+      <button type="button" class="icon-btn menu-btn" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú">
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" data-menu hidden>
+    <nav class="container" aria-label="Menú móvil">
+      <ul role="list">
+        <li><a href="/">Inicio</a></li>
+        {nav.map((item) => (
+          <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+        <li><a href="/contacto">Contacto</a></li>
+      </ul>
+      <div class="mobile-menu__cta">
+        <a class="btn btn-primary btn-block" href="/productos/combata-original">Comprar</a>
+        <a class="btn btn-secondary btn-block" href="/custom#presupuesto">Solicitar presupuesto</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 50; background: rgba(245, 244, 238, 0.92);
+    backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px);
+    border-bottom: 1px solid transparent; transition: border-color .2s;
+  }
+  .site-header.is-scrolled { border-bottom-color: var(--color-line); }
+  .site-header__inner { height: var(--header-h); display: flex; align-items: center; gap: 2rem; }
+  .site-header__logo img { height: 30px; width: auto; }
+  .site-nav { margin-left: auto; }
+  .site-nav ul { display: flex; gap: 2rem; }
+  .site-nav a { text-decoration: none; font-weight: 500; font-size: .9375rem; padding: .5rem 0; position: relative; }
+  .site-nav a::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; border-radius: 3px;
+    background: var(--color-lime); box-shadow: 0 0 0 1px var(--color-purple); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease);
+  }
+  .site-nav a:hover::after, .site-nav a[aria-current='page']::after { transform: scaleX(1); }
+  .site-header__actions { display: flex; gap: .25rem; align-items: center; }
+  .icon-btn {
+    position: relative; width: 44px; height: 44px; display: grid; place-items: center;
+    background: none; border: 0; border-radius: 50%; color: var(--color-purple);
+  }
+  .icon-btn:hover { background: rgba(26, 11, 61, .07); }
+  .icon-btn :global(svg) { width: 24px; height: 24px; }
+  .cart-count {
+    position: absolute; top: 4px; right: 2px; min-width: 19px; height: 19px; padding: 0 5px; border-radius: 10px;
+    background: var(--color-lime); color: var(--color-purple); border: 1.5px solid var(--color-purple);
+    font-size: 11px; font-weight: 700; line-height: 16px; text-align: center;
+  }
+  .menu-btn { display: none; }
+  .mobile-menu {
+    position: fixed; inset: var(--header-h) 0 0 0; background: var(--color-cream); overflow-y: auto;
+    padding-block: 1.5rem 2rem; border-top: 1px solid var(--color-line);
+  }
+  .mobile-menu ul a {
+    display: block; padding: .9rem 0; font-size: 1.75rem; font-weight: 600; letter-spacing: -.03em;
+    text-decoration: none; border-bottom: 1px solid var(--color-line);
+  }
+  .mobile-menu ul a[aria-current='page'] { text-decoration: underline; text-decoration-color: var(--color-lime); text-decoration-thickness: 4px; text-underline-offset: 6px; }
+  .mobile-menu__cta { display: grid; gap: .75rem; margin-top: 2rem; }
+  @media (max-width: 860px) {
+    .site-nav { display: none; }
+    .menu-btn { display: grid; }
+    .site-header__actions { margin-left: auto; }
+    .site-header__logo img { height: 26px; }
+  }
+  @media (min-width: 861px) { .mobile-menu { display: none !important; } }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]')!;
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]')!;
+  const menu = document.querySelector<HTMLElement>('[data-menu]')!;
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const setOpen = (open: boolean) => {
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    btn.innerHTML = open
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>';
+    menu.hidden = !open;
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+    if (open) menu.querySelector<HTMLElement>('a')?.focus();
+  };
+  btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !menu.hidden) { setOpen(false); btn.focus(); }
+  });
+  window.matchMedia('(min-width: 861px)').addEventListener('change', (e) => e.matches && setOpen(false));
+</script>
