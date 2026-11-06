@@ -1,4 +1,5 @@
 ---
+import { url } from '../data/url';
 import Icon from './Icon.astro';
 ---
 <dialog class="drawer" data-drawer aria-labelledby="drawer-title">
@@ -13,7 +14,7 @@ import Icon from './Icon.astro';
       <p class="small muted">Gastos de envío e impuestos: <span class="pending">por confirmar</span></p>
       <button type="button" class="btn btn-primary btn-block" disabled aria-describedby="checkout-note">Finalizar compra</button>
       <p id="checkout-note" class="small muted">La compra online todavía no está activa. Estamos configurando la tienda y el pago seguro.</p>
-      <a class="link-arrow small" href="/carrito">Ver carrito completo</a>
+      <a class="link-arrow small" href={url('/carrito')}>Ver carrito completo</a>
     </div>
   </div>
 </dialog>

@@ -1,4 +1,5 @@
 ---
+import { url } from '../data/url';
 import '@fontsource-variable/sora';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
@@ -24,9 +25,9 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : nu
     {(noindex || PRELAUNCH) && <meta name="robots" content="noindex, nofollow" />}
     {canonical && <link rel="canonical" href={canonical} />}
     <meta name="theme-color" content="#F5F4EE" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon-180.png" />
+    <link rel="icon" href={url('/favicon.ico')} sizes="any" />
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={url('/apple-touch-icon-180.png')} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content="Combata" />

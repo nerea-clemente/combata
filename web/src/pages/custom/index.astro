@@ -1,4 +1,5 @@
 ---
+import { url } from '../../data/url';
 import Base from '../../layouts/Base.astro';
 import Placeholder from '../../components/Placeholder.astro';
 import Pending from '../../components/Pending.astro';
@@ -38,7 +39,7 @@ const customFaqs = faqs.filter((f) => f.group === 'custom');
         </div>
       </div>
       <div class="c-hero__media">
-        <Placeholder label="Ejemplo de personalización: Combata con logo" note="Mockup o ejemplo real pendiente" tone="lavender" ratio="1 / 1" sticker="/brand/rayos.svg" />
+        <Placeholder label="Ejemplo de personalización: Combata con logo" note="Mockup o ejemplo real pendiente" tone="lavender" ratio="1 / 1" sticker={url('/brand/rayos.svg')} />
       </div>
     </div>
   </section>

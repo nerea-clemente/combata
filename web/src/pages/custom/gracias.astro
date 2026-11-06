@@ -1,4 +1,5 @@
 ---
+import { url } from '../../data/url';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 ---
@@ -8,8 +9,8 @@ import Icon from '../../components/Icon.astro';
     <h1 class="h-1">Hemos recibido tu solicitud.</h1>
     <p class="lead muted">Gracias por contarnos tu idea. La revisamos y te escribimos por email con los siguientes pasos.</p>
     <div class="btn-row">
-      <a class="btn btn-primary" href="/">Volver al inicio</a>
-      <a class="btn btn-secondary" href="/custom">Combata Custom <Icon name="arrow" /></a>
+      <a class="btn btn-primary" href={url('/')}>Volver al inicio</a>
+      <a class="btn btn-secondary" href={url('/custom')}>Combata Custom <Icon name="arrow" /></a>
     </div>
   </section>
 </Base>

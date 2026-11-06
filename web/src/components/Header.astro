@@ -1,18 +1,19 @@
 ---
+import { url, stripBase } from '../data/url';
 import { nav } from '../data/site';
 import Icon from './Icon.astro';
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const path = stripBase(Astro.url.pathname).replace(/\/$/, '') || '/';
 const isCurrent = (href: string) => path === href || path.startsWith(href + '/') || (href === '/comprar' && path.startsWith('/productos'));
 ---
 <header class="site-header" data-header>
   <div class="container site-header__inner">
-    <a href="/" class="site-header__logo" aria-label="Combata, ir al inicio">
-      <img src="/brand/logo_combata_principal.svg" alt="Combata" width="160" height="33" />
+    <a href={url('/')} class="site-header__logo" aria-label="Combata, ir al inicio">
+      <img src={url('/brand/logo_combata_principal.svg')} alt="Combata" width="160" height="33" />
     </a>
     <nav class="site-nav" aria-label="Principal">
       <ul role="list">
         {nav.map((item) => (
-          <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+          <li><a href={url(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
         ))}
       </ul>
     </nav>
@@ -29,15 +30,15 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + '/')
   <div class="mobile-menu" id="mobile-menu" data-menu hidden>
     <nav class="container" aria-label="Menú móvil">
       <ul role="list">
-        <li><a href="/">Inicio</a></li>
+        <li><a href={url('/')}>Inicio</a></li>
         {nav.map((item) => (
-          <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+          <li><a href={url(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
         ))}
-        <li><a href="/contacto">Contacto</a></li>
+        <li><a href={url('/contacto')}>Contacto</a></li>
       </ul>
       <div class="mobile-menu__cta">
-        <a class="btn btn-primary btn-block" href="/productos/combata-original">Comprar</a>
-        <a class="btn btn-secondary btn-block" href="/custom#presupuesto">Solicitar presupuesto</a>
+        <a class="btn btn-primary btn-block" href={url('/productos/combata-original')}>Comprar</a>
+        <a class="btn btn-secondary btn-block" href={url('/custom#presupuesto')}>Solicitar presupuesto</a>
       </div>
     </nav>
   </div>

@@ -1,4 +1,5 @@
 ---
+import { url } from '../../data/url';
 import Base from '../../layouts/Base.astro';
 import Placeholder from '../../components/Placeholder.astro';
 import Pending from '../../components/Pending.astro';
@@ -32,8 +33,8 @@ const productFaqs = faqs.filter((f) => f.group !== 'custom').slice(0, 6);
   <div class="container pdp">
     <nav class="breadcrumb" aria-label="Ruta de navegación">
       <ol>
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/comprar">Comprar</a></li>
+        <li><a href={url('/')}>Inicio</a></li>
+        <li><a href={url('/comprar')}>Comprar</a></li>
         <li aria-current="page">Combata Original</li>
       </ol>
     </nav>
@@ -150,7 +151,7 @@ const productFaqs = faqs.filter((f) => f.group !== 'custom').slice(0, 6);
     <div class="container pdp-faq">
       <div>
         <h2 id="pdp-faq" class="h-2">Preguntas frecuentes</h2>
-        <a class="link-arrow" href="/preguntas-frecuentes">Ver todas <Icon name="arrow" /></a>
+        <a class="link-arrow" href={url('/preguntas-frecuentes')}>Ver todas <Icon name="arrow" /></a>
       </div>
       <FaqList items={productFaqs} />
     </div>
@@ -162,7 +163,7 @@ const productFaqs = faqs.filter((f) => f.group !== 'custom').slice(0, 6);
         <p class="eyebrow">Combata Custom</p>
         <p class="h-2 cross__t">¿Lo quieres con tu logo o diseño?</p>
       </div>
-      <a class="btn btn-secondary" href="/custom">Ver Combata Custom <Icon name="arrow" /></a>
+      <a class="btn btn-secondary" href={url('/custom')}>Ver Combata Custom <Icon name="arrow" /></a>
     </div>
   </section>
 </Base>

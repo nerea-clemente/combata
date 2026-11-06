@@ -1,4 +1,5 @@
 ---
+import { url } from '../data/url';
 import Base from '../layouts/Base.astro';
 import Pending from '../components/Pending.astro';
 import Icon from '../components/Icon.astro';
@@ -18,7 +19,7 @@ import { site } from '../data/site';
       <div class="contact__block">
         <h2 class="h-3">Pedidos personalizados</h2>
         <p class="muted">Si quieres Combata para un evento, una marca o una celebración, usa el formulario de presupuesto.</p>
-        <a class="btn btn-primary" href="/custom#presupuesto">Solicitar presupuesto <Icon name="arrow" /></a>
+        <a class="btn btn-primary" href={url('/custom#presupuesto')}>Solicitar presupuesto <Icon name="arrow" /></a>
       </div>
       <div class="contact__block">
         <h2 class="h-3">Redes</h2>

@@ -5,6 +5,7 @@
  * (p. ej. Shopify), sustituir `checkoutAvailable` y `goToCheckout`.
  */
 import { product, formatPrice } from '../data/site';
+import { url } from '../data/url';
 
 export type CartLine = { productId: string; colourId: string | null; packId: string | null; qty: number };
 
@@ -81,7 +82,7 @@ const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&
 export function renderLines(el: HTMLElement) {
   const lines = read();
   if (!lines.length) {
-    el.innerHTML = `<div class="cart-empty"><p class="h-3">Tu carrito está vacío.</p><p class="muted">Cuando añadas tu Combata, aparecerá aquí.</p><a class="btn btn-primary" href="${product.href}">Ver Combata Original</a></div>`;
+    el.innerHTML = `<div class="cart-empty"><p class="h-3">Tu carrito está vacío.</p><p class="muted">Cuando añadas tu Combata, aparecerá aquí.</p><a class="btn btn-primary" href="${url(product.href)}">Ver Combata Original</a></div>`;
     return;
   }
   el.innerHTML = `<ul class="cart-lines" role="list">${lines

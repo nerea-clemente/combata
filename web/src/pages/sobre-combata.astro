@@ -1,4 +1,5 @@
 ---
+import { url } from '../data/url';
 import Base from '../layouts/Base.astro';
 import Pending from '../components/Pending.astro';
 import Icon from '../components/Icon.astro';
@@ -15,7 +16,7 @@ const values = [
     <h1 class="h-1 ab-hero__title">Que estar pendiente de tu bebida no sea parte del plan.</h1>
     <div class="ab-hero__body">
       <p class="lead">En Combata creemos que los accesorios más útiles también pueden tener personalidad. Por eso apostamos por productos reutilizables, fáciles de llevar y pensados para acompañarte en tus planes.</p>
-      <img src="/brand/nube_gafas_simple.svg" alt="" width="220" height="150" class="ab-hero__cloud" />
+      <img src={url('/brand/nube_gafas_simple.svg')} alt="" width="220" height="150" class="ab-hero__cloud" />
     </div>
   </section>
 
@@ -57,8 +58,8 @@ const values = [
     <div class="container end-cta">
       <p class="h-2">Ponle un Combata.</p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="/productos/combata-original">Comprar <Icon name="arrow" /></a>
-        <a class="btn btn-secondary" href="/custom">Personalizar</a>
+        <a class="btn btn-primary" href={url('/productos/combata-original')}>Comprar <Icon name="arrow" /></a>
+        <a class="btn btn-secondary" href={url('/custom')}>Personalizar</a>
       </div>
     </div>
   </section>

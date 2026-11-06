@@ -1,4 +1,5 @@
 ---
+import { url } from '../data/url';
 import Base from '../layouts/Base.astro';
 import FaqList from '../components/FaqList.astro';
 import Icon from '../components/Icon.astro';
@@ -25,7 +26,7 @@ const groups = [
     ))}
     <aside class="faq-page__more">
       <p class="h-3">¿No encuentras lo que buscas?</p>
-      <a class="link-arrow" href="/contacto">Escríbenos <Icon name="arrow" /></a>
+      <a class="link-arrow" href={url('/contacto')}>Escríbenos <Icon name="arrow" /></a>
     </aside>
   </section>
 </Base>

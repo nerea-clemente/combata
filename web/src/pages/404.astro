@@ -1,12 +1,13 @@
 ---
+import { url } from '../data/url';
 import Base from '../layouts/Base.astro';
 ---
 <Base title="Página no encontrada | Combata" description="No encontramos esta página." noindex>
   <section class="container nf">
-    <img src="/brand/nube_gafas_simple.svg" alt="" width="180" height="122" />
+    <img src={url('/brand/nube_gafas_simple.svg')} alt="" width="180" height="122" />
     <h1 class="h-1">Esta página no está en el plan.</h1>
     <p class="lead muted">Puede que el enlace haya cambiado o ya no exista.</p>
-    <div class="btn-row"><a class="btn btn-primary" href="/">Ir al inicio</a><a class="btn btn-secondary" href="/comprar">Comprar</a></div>
+    <div class="btn-row"><a class="btn btn-primary" href={url('/')}>Ir al inicio</a><a class="btn btn-secondary" href={url('/comprar')}>Comprar</a></div>
   </section>
 </Base>
 <style>

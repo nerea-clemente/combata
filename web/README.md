@@ -47,3 +47,13 @@ En `src/data/site.ts`:
 | Vectorización profesional del logo e isotipo | `public/brand/` (los SVG actuales son una vectorización de la lámina) |
 
 No hay analítica ni cookies de terceros, así que no se incluye banner de cookies. Si se añaden, hará falta gestión de consentimiento.
+
+## Vista previa en GitHub Pages
+
+El workflow `.github/workflows/deploy-pages.yml` construye y publica la web en cada push.
+
+1. Una sola vez: en GitHub, **Settings → Pages → Build and deployment → Source: «GitHub Actions»**.
+2. Después, cada cambio en `web/` se publica solo en `https://nerea-clemente.github.io/combata/`.
+   También se puede lanzar a mano desde **Actions → Publicar web en GitHub Pages → Run workflow**.
+
+La web lleva `noindex` mientras `PRELAUNCH = true`, así que los buscadores no deberían indexarla, aunque cualquiera con el enlace puede verla.

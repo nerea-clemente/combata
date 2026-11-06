@@ -1,4 +1,5 @@
 ---
+import { url } from '../data/url';
 import Base from '../layouts/Base.astro';
 import Placeholder from '../components/Placeholder.astro';
 import Pending from '../components/Pending.astro';
@@ -13,7 +14,7 @@ const price = formatPrice(product.price);
       <p class="lead muted">El protector reutilizable para tu bebida.</p>
     </header>
 
-    <a class="card" href={product.href}>
+    <a class="card" href={url(product.href)}>
       <Placeholder label="Combata Original sobre fondo limpio" note="Foto de producto pendiente" tone="sand" ratio="4 / 3" />
       <div class="card__body">
         <div>
@@ -32,7 +33,7 @@ const price = formatPrice(product.price);
 
     <aside class="shop__custom">
       <p class="h-3">¿Necesitas unidades personalizadas para un evento o una marca?</p>
-      <a class="link-arrow" href="/custom">Combata Custom <Icon name="arrow" /></a>
+      <a class="link-arrow" href={url('/custom')}>Combata Custom <Icon name="arrow" /></a>
     </aside>
   </section>
 </Base>
