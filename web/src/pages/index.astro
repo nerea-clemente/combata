@@ -1,227 +1,143 @@
 ---
 import { url } from '../data/url';
 import Base from '../layouts/Base.astro';
-import Placeholder from '../components/Placeholder.astro';
-import Pending from '../components/Pending.astro';
 import Icon from '../components/Icon.astro';
-import FaqList from '../components/FaqList.astro';
 import Underline from '../components/Underline.astro';
 import { product } from '../data/site';
-import { faqs } from '../data/faq';
-
-const featured = faqs.filter((f) =>
-  ['¿Qué es Combata?', '¿Se puede reutilizar?', '¿Evita que alguien manipule mi bebida?', '¿Cómo personalizo Combata para mi evento?'].includes(f.q));
-const uses = ['Bodas y celebraciones', 'Festivales', 'Universidades', 'Locales de ocio', 'Marcas y agencias'];
 ---
 <Base
   title="Combata | Protectores reutilizables para bebidas"
   description="Descubre Combata, el protector reutilizable para tu bebida. Elige tu color o personalízalo para tu evento, festival o celebración."
 >
-  <!-- 02 · HERO -->
-  <section class="hero">
+  <!-- HERO -->
+  <section class="hero on-dark">
     <div class="container hero__grid">
       <div class="hero__copy">
-        <p class="eyebrow">Protector reutilizable para bebidas</p>
-        <h1 class="h-hero hero__title">Ponle un <span class="u">Combata.<Underline /></span></h1>
-        <p class="lead hero__sub">El protector reutilizable para tu bebida.</p>
-        <p class="muted hero__support">Un accesorio de silicona pensado para acompañarte en fiestas, festivales y celebraciones.</p>
+        <h1 class="hero__title">Ponle un <span class="u">Combata.<Underline /></span></h1>
+        <p class="hero__text">El protector reutilizable para tu bebida. Menos derrames, más tranquilidad y toda la fiesta por delante.</p>
         <div class="btn-row">
-          <a class="btn btn-primary" href={url(product.href)}>Comprar <Icon name="arrow" /></a>
-          <a class="btn btn-secondary" href={url('/custom')}>Personalizar</a>
+          <a class="btn btn-primary" href={url(product.href)}>Comprar ahora <Icon name="arrow" /></a>
+          <a class="btn btn-ghost" href={url('/custom')}>Personalizar <Icon name="arrow" /></a>
         </div>
       </div>
       <div class="hero__media">
-        <Placeholder label="Combata Original sobre fondo limpio, encuadre protagonista" note="Foto de producto pendiente" tone="purple" ratio="4 / 5" />
+        <img src={url('/img/hero_vaso.jpg')} alt="Vaso con una tapa Combata lima y pajita" width="756" height="1128" fetchpriority="high" />
       </div>
     </div>
   </section>
 
-  <!-- 03 · QUÉ ES -->
-  <section class="section what" aria-labelledby="what-title">
+  <!-- BENEFICIOS -->
+  <section class="benefits" aria-label="Beneficios">
     <div class="container">
-      <div class="split">
-        <div class="split__aside">
-          <p class="index">01</p>
-          <h2 id="what-title" class="h-1">¿Qué es Combata?</h2>
-        </div>
-        <div class="split__main reveal">
-          <p class="lead">Un protector flexible de silicona que se coloca sobre el vaso. Añade una barrera física adicional y ayuda a reducir salpicaduras, para que puedas centrarte en el plan.</p>
-          <a class="link-arrow" href="#como-funciona">Ver cómo funciona <Icon name="arrow" /></a>
-        </div>
-      </div>
-      <div class="what__media reveal">
-        <Placeholder label="Demostración real: cómo se coloca Combata sobre el vaso" note="Vídeo o secuencia de fotos pendiente" tone="sand" ratio="21 / 9" />
-      </div>
+      <ul role="list" class="benefits__list">
+        <li>
+          <Icon name="shield" class="benefits__icon" />
+          <h2>Una barrera<br />adicional</h2>
+          <p>Añade una capa extra<br />de protección a tu bebida.</p>
+        </li>
+        <li>
+          <Icon name="drop" class="benefits__icon" />
+          <h2>Menos<br />derrames</h2>
+          <p>Disfruta sin preocuparte<br />por salpicaduras.</p>
+        </li>
+        <li>
+          <Icon name="refresh" class="benefits__icon" />
+          <h2>Reutilizable<br />y duradero</h2>
+          <p>Úsalo, lávalo<br />y llévalo contigo.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-      <!-- 04 · BENEFICIOS -->
-      <div class="benefits">
-        <h2 class="visually-hidden">Beneficios</h2>
-        <ol role="list" class="benefits__list">
-          <li class="reveal">
-            <span class="index">A</span>
-            <h3 class="h-3">Una barrera adicional.</h3>
-            <p class="muted">Una capa física más entre tu bebida y el entorno.</p>
-          </li>
-          <li class="reveal">
-            <span class="index">B</span>
-            <h3 class="h-3">Menos salpicaduras.</h3>
-            <p class="muted">Diseñado para ayudar a reducir pequeños derrames durante su uso.</p>
-          </li>
-          <li class="reveal">
-            <span class="index">C</span>
-            <h3 class="h-3">Reutilizable.</h3>
-            <p class="muted">Úsalo, límpialo y vuelve a llevarlo contigo.</p>
-          </li>
-        </ol>
-        <p class="small muted benefits__note"><Pending label="Pendiente" /> Validar condiciones de uso, limpieza y claims con la información técnica del fabricante.</p>
+  <!-- DESCUBRE -->
+  <section class="discover" aria-labelledby="discover-title">
+    <div class="container discover__grid">
+      <div class="discover__media">
+        <img src={url('/img/tapas_apiladas.jpg')} alt="Tres tapas Combata apiladas en lima, rosa y lavanda" width="900" height="666" loading="lazy" />
+      </div>
+      <div class="discover__copy">
+        <h2 id="discover-title" class="sec-title">Descubre<br />Combata</h2>
+        <p class="sec-text">Elige tu color, combina<br />y llévate tu pack favorito.</p>
+        <a class="btn btn-primary" href={url('/comprar')}>Ver productos <Icon name="arrow" /></a>
       </div>
     </div>
   </section>
 
-  <!-- 05 · PRODUCTO -->
-  <section class="section paper product-teaser" aria-labelledby="prod-title">
-    <div class="container product-teaser__grid">
-      <div class="reveal">
-        <Placeholder label="Combata Original en todos sus colores disponibles" note="Foto de producto pendiente" tone="sand" ratio="1 / 1" />
+  <!-- CUSTOM -->
+  <section class="custom-band on-dark" aria-labelledby="custom-title">
+    <svg class="custom-band__wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 90 V52 C 240 4, 420 0, 640 30 C 900 66, 1150 70, 1440 10 V90 Z" fill="currentColor" />
+    </svg>
+    <div class="container custom-band__grid">
+      <div class="custom-band__copy">
+        <h2 id="custom-title" class="sec-title">Combata Custom</h2>
+        <p class="sec-text">Personalízalo para tu evento,<br />marca o celebración.</p>
+        <a class="btn btn-ghost" href={url('/custom#presupuesto')}>Solicitar presupuesto <Icon name="arrow" /></a>
       </div>
-      <div class="product-teaser__copy reveal">
-        <p class="index">02</p>
-        <h2 id="prod-title" class="h-1">Descubre Combata.</h2>
-        <p class="lead">Elige tu color y encuentra el formato que mejor encaje contigo.</p>
-        <div class="swatches" aria-label="Colores">
-          {product.colours.map((c) => <span class="swatch" style={`background:${c.hex}`} title={c.name}><span class="visually-hidden">{c.name}</span></span>)}
-          {product.colours.some((c) => c.pendiente) && <Pending label="Colores por confirmar" />}
-        </div>
-        <a class="btn btn-dark" href={url('/comprar')}>Ver productos <Icon name="arrow" /></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 06 · CUSTOM -->
-  <section class="section dark on-dark custom-teaser" aria-labelledby="custom-title">
-    <div class="container custom-teaser__grid">
-      <div class="custom-teaser__copy">
-        <p class="eyebrow">Combata Custom</p>
-        <h2 id="custom-title" class="h-1">Tu evento. <br />Tu Combata.</h2>
-        <p class="lead muted">Personaliza Combata con tu diseño, logo o mensaje para celebraciones, festivales y acciones de marca.</p>
-        <div class="btn-row">
-          <a class="btn btn-primary" href={url('/custom#presupuesto')}>Solicitar presupuesto <Icon name="arrow" /></a>
-          <a class="btn btn-secondary" href={url('/custom')}>Ver Combata Custom</a>
-        </div>
-        <img class="custom-teaser__rays" src={url('/brand/rayos.svg')} alt="" width="110" height="84" loading="lazy" />
-      </div>
-      <div>
-        <p class="small muted custom-teaser__label">Para</p>
-        <ul role="list" class="uses">
-          {uses.map((u, i) => <li class="reveal"><span class="index">{String(i + 1).padStart(2, '0')}</span>{u}</li>)}
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- 07 · CÓMO FUNCIONA -->
-  <section class="section how" id="como-funciona" aria-labelledby="how-title">
-    <div class="container">
-      <div class="how__head">
-        <h2 id="how-title" class="h-1">Así funciona.</h2>
-        <Pending label="Instrucciones exactas por validar" />
-      </div>
-      <ol role="list" class="steps">
-        <li class="reveal"><span class="steps__n">1</span><h3 class="h-2">Colócalo</h3><p class="muted">Ponlo sobre tu vaso.</p></li>
-        <li class="reveal"><span class="steps__n">2</span><h3 class="h-2">Disfruta</h3><p class="muted">Sigue con tu plan.</p></li>
-        <li class="reveal"><span class="steps__n">3</span><h3 class="h-2">Límpialo y reutilízalo</h3><p class="muted">Y vuelve a llevarlo contigo la próxima vez.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- 08 · SOBRE LA MARCA -->
-  <section class="section paper about-teaser" aria-labelledby="about-title">
-    <div class="container about-teaser__grid">
-      <img class="about-teaser__cloud" src={url('/brand/isotipo_nube_vaso_sin_gafas.svg')} alt="" width="200" height="194" loading="lazy" />
-      <div class="reveal">
-        <h2 id="about-title" class="h-1">Que estar pendiente de tu bebida no sea parte del plan.</h2>
-        <p class="lead muted">Creamos accesorios útiles, reutilizables y con personalidad para acompañar tus planes.</p>
-        <a class="link-arrow" href={url('/sobre-combata')}>Conoce Combata <Icon name="arrow" /></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 09 · FAQ -->
-  <section class="section faq-teaser" aria-labelledby="faq-title">
-    <div class="container split">
-      <div class="split__aside">
-        <h2 id="faq-title" class="h-1">Preguntas frecuentes</h2>
-        <a class="link-arrow" href={url('/preguntas-frecuentes')}>Ver todas <Icon name="arrow" /></a>
-      </div>
-      <div class="split__main">
-        <FaqList items={featured} />
+      <div class="custom-band__media">
+        <img src={url('/img/custom_vaso.jpg')} alt="Vaso con tapa Combata lavanda personalizada con el texto «Tu logo»" width="684" height="498" loading="lazy" />
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  /* hero */
-  .hero { padding-block: clamp(2rem, 4vw, 4rem) clamp(3rem, 6vw, 6rem); }
-  .hero__grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
-  .hero__copy { display: grid; gap: 1.5rem; justify-items: start; }
-  .hero__title { margin-top: .5rem; }
+  /* HERO */
+  .hero { background: var(--hero-grad); color: var(--color-cream); overflow: hidden; }
+  .hero__grid { display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: 2rem; min-height: min(78vh, 720px); }
+  .hero__copy { display: grid; gap: 1.75rem; justify-items: start; padding-block: clamp(3rem, 7vw, 6rem); }
+  .hero__title { font-size: clamp(3.25rem, 1.8rem + 5.6vw, 6.5rem); line-height: .98; letter-spacing: -.04em; color: #fff; }
   .u { position: relative; display: inline-block; isolation: isolate; white-space: nowrap; }
-  .hero__sub { font-weight: 600; margin-top: .75rem; }
-  .hero__support { max-width: 42ch; margin-top: -.75rem; }
-  .hero .btn-row { margin-top: .5rem; }
-
-  /* split */
-  .split { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 6vw, 6rem); }
-  .split__aside { display: grid; gap: 1.25rem; align-content: start; justify-items: start; }
-  .split__main { display: grid; gap: 1.75rem; align-content: start; justify-items: start; }
-  .what__media { margin-top: clamp(3rem, 6vw, 5rem); }
-
-  .benefits { margin-top: clamp(3.5rem, 7vw, 6rem); }
-  .benefits__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 3rem); }
-  .benefits__list li { border-top: 1.5px solid var(--color-purple); padding-top: 1.25rem; display: grid; gap: .6rem; align-content: start; }
-  .benefits__list .h-3 { font-size: var(--step-2); letter-spacing: -.025em; }
-  .benefits__note { margin-top: 2rem; display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
-
-  /* product */
-  .product-teaser__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
-  .product-teaser__copy { display: grid; gap: 1.5rem; justify-items: start; }
-  .swatches { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
-  .swatch { width: 2.25rem; height: 2.25rem; border-radius: 50%; border: 1.5px solid var(--color-purple); }
-
-  /* custom */
-  .custom-teaser__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
-  .custom-teaser__copy { display: grid; gap: 1.5rem; justify-items: start; position: relative; }
-  .custom-teaser__copy .h-1 { font-size: var(--step-4); }
-  .custom-teaser__rays { position: absolute; top: 1.2rem; right: 8%; width: clamp(64px, 8vw, 104px); transform: rotate(6deg); }
-  .custom-teaser__label { text-transform: uppercase; letter-spacing: .08em; font-weight: 600; margin-bottom: .5rem; }
-  .uses li {
-    display: flex; align-items: baseline; gap: 1.25rem; padding: 1.1rem 0; border-bottom: 1px solid rgba(245,244,238,.18);
-    font-size: var(--step-2); font-weight: 600; letter-spacing: -.025em;
+  .hero__text { font-size: var(--step-1); line-height: 1.5; max-width: 30ch; color: rgba(255, 255, 255, .92); margin-top: .75rem; }
+  .hero__media { align-self: end; justify-self: end; height: 100%; display: flex; align-items: flex-end; }
+  .hero__media img {
+    width: auto; max-height: min(78vh, 720px); object-fit: contain;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 18%, #000 88%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 14%);
+    -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent 0, #000 18%, #000 88%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 14%);
+    mask-composite: intersect;
   }
-  .uses li:first-child { border-top: 1px solid rgba(245,244,238,.18); }
 
-  /* how */
-  .how__head { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 3rem); counter-reset: s; }
-  .steps li { display: grid; gap: .75rem; align-content: start; }
-  .steps__n {
-    width: 3.25rem; height: 3.25rem; border-radius: 50%; display: grid; place-items: center;
-    border: 1.5px solid var(--color-purple); font-weight: 700; font-size: var(--step-1); margin-bottom: .75rem;
+  /* BENEFICIOS */
+  .benefits { background: var(--color-cream); padding-block: clamp(2.5rem, 5vw, 3.75rem); border-bottom: 1px solid var(--color-line); }
+  .benefits__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center; }
+  .benefits__list li { display: grid; justify-items: center; gap: .6rem; }
+  .benefits__list :global(.benefits__icon) { width: 44px; height: 44px; stroke-width: 1.6; margin-bottom: .4rem; }
+  .benefits__list h2 { font-size: var(--step-1); line-height: 1.15; letter-spacing: -.02em; }
+  .benefits__list p { font-size: var(--step--1); line-height: 1.45; }
+
+  /* DESCUBRE */
+  .discover { background: #F5EDEA; overflow: hidden; }
+  .discover__grid { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: clamp(1.5rem, 4vw, 4rem); padding-block: clamp(1.5rem, 3vw, 2.5rem); }
+  .discover__media img { width: 100%; -webkit-mask-image: radial-gradient(75% 75% at 50% 50%, #000 70%, transparent 100%); mask-image: radial-gradient(75% 75% at 50% 50%, #000 70%, transparent 100%); }
+  .discover__copy { display: grid; gap: 1.5rem; justify-items: start; }
+  .sec-title { font-size: clamp(2.5rem, 1.6rem + 3.2vw, 4.25rem); line-height: 1; letter-spacing: -.035em; }
+  .sec-text { font-size: var(--step-2); line-height: 1.3; font-weight: 500; letter-spacing: -.015em; }
+
+  /* CUSTOM */
+  .custom-band { position: relative; background: #250833; color: var(--color-cream); margin-top: -1px; }
+  .custom-band__wave { position: absolute; left: 0; right: 0; top: -60px; width: 100%; height: 61px; color: #250833; display: block; }
+  .discover { padding-bottom: 60px; }
+  .custom-band__grid { display: grid; grid-template-columns: 1.1fr 1fr; align-items: end; gap: 2rem; }
+  .custom-band__copy { display: grid; gap: 1.25rem; justify-items: start; padding-block: clamp(2.5rem, 5vw, 4rem); align-self: center; }
+  .custom-band .sec-title { color: #fff; }
+  .custom-band .sec-text { color: rgba(255, 255, 255, .9); font-size: var(--step-1); }
+  .custom-band__media { justify-self: end; }
+  .custom-band__media img {
+    width: min(100%, 560px);
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22%, #000 85%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 18%);
+    -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent 0, #000 22%, #000 85%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 18%);
+    mask-composite: intersect;
   }
-  .steps li:first-child .steps__n { background: var(--color-lime); }
-  .steps .h-2 { font-size: var(--step-3); }
 
-  /* about */
-  .about-teaser__grid { display: grid; grid-template-columns: auto 1fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
-  .about-teaser__grid > div { display: grid; gap: 1.5rem; justify-items: start; max-width: 50rem; }
-  .about-teaser__cloud { width: clamp(120px, 16vw, 210px); height: auto; }
-
-  @media (max-width: 900px) {
-    .hero__grid, .split, .product-teaser__grid, .custom-teaser__grid { grid-template-columns: 1fr; }
-    .hero__media { max-width: 520px; width: 100%; }
-    .benefits__list, .steps { grid-template-columns: 1fr; }
-    .about-teaser__grid { grid-template-columns: 1fr; }
-    .custom-teaser__rays { top: -0.5rem; right: 0; }
+  @media (max-width: 820px) {
+    .hero__grid { grid-template-columns: 1fr; min-height: 0; gap: 0; }
+    .hero__copy { padding-block: 2.5rem 1rem; }
+    .hero .btn-row { flex-direction: column; align-items: flex-start; }
+    .hero__media { justify-self: end; margin-right: calc(var(--gutter) * -1); }
+    .hero__media img { max-height: 420px; }
+    .benefits__list { grid-template-columns: 1fr; gap: 2.25rem; }
+    .discover__grid, .custom-band__grid { grid-template-columns: 1fr; }
+    .discover__copy { order: -1; padding-top: 2rem; }
+    .custom-band__media { margin-right: calc(var(--gutter) * -1); }
   }
 </style>

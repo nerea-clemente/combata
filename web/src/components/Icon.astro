@@ -1,8 +1,9 @@
 ---
 /** Iconos funcionales mínimos (navegación, carrito, formularios). Sin iconografía decorativa. */
-interface Props { name: 'arrow' | 'cart' | 'menu' | 'close' | 'plus' | 'minus' | 'check' | 'alert'; class?: string }
+type Name = 'arrow' | 'cart' | 'menu' | 'close' | 'plus' | 'minus' | 'check' | 'alert' | 'shield' | 'drop' | 'refresh' | 'cup' | 'truck' | 'rings' | 'music' | 'cap' | 'globe' | 'sparkles' | 'chevron';
+interface Props { name: Name; class?: string }
 const { name, class: cls } = Astro.props;
-const paths: Record<Props['name'], string> = {
+const paths: Record<Name, string> = {
   arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
   cart: '<path d="M3 4h2.2l2.1 11.2a1.5 1.5 0 0 0 1.5 1.3h8.6a1.5 1.5 0 0 0 1.5-1.2L20.5 8H6.2"/><circle cx="9.5" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/>',
   menu: '<path d="M4 8h16M4 16h16"/>',
@@ -11,6 +12,17 @@ const paths: Record<Props['name'], string> = {
   minus: '<path d="M5 12h14"/>',
   check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
   alert: '<circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/>',
+  shield: '<path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.4-7.5 9.5-4.3-1.1-7.5-4.9-7.5-9.5V6L12 3z"/>',
+  drop: '<path d="M12 3.2c3.4 4.3 6 7.8 6 11a6 6 0 0 1-12 0c0-3.2 2.6-6.7 6-11z"/>',
+  refresh: '<path d="M20 11a8 8 0 0 0-14.3-4.6L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.6L20 16M20 20v-4h-4"/>',
+  cup: '<path d="M5 6h14M6 6l1.5 14h9L18 6M8 3h8l1 3H7z"/>',
+  truck: '<path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/>',
+  rings: '<circle cx="8.5" cy="14" r="5.5"/><circle cx="15.5" cy="14" r="5.5"/><path d="M7 5l1.5-2h3L13 5l-2 2.5"/>',
+  music: '<path d="M9 18V5.5l11-2.5v12.5"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="15.5" r="2.5"/>',
+  cap: '<path d="M2 9l10-5 10 5-10 5L2 9z"/><path d="M6 11.2V16c3.5 2.5 8.5 2.5 12 0v-4.8M21 9.5v5"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/>',
+  sparkles: '<path d="M10 3l1.8 5.2L17 10l-5.2 1.8L10 17l-1.8-5.2L3 10l5.2-1.8zM18 14l.9 2.1L21 17l-2.1.9L18 20l-.9-2.1L15 17l2.1-.9z"/>',
+  chevron: '<path d="M9 6l6 6-6 6"/>',
 };
 ---
 <svg class:list={[name, cls]} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" set:html={paths[name]} />

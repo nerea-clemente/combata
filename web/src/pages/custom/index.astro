@@ -1,117 +1,55 @@
 ---
 import { url } from '../../data/url';
 import Base from '../../layouts/Base.astro';
-import Placeholder from '../../components/Placeholder.astro';
-import Pending from '../../components/Pending.astro';
 import Icon from '../../components/Icon.astro';
-import FaqList from '../../components/FaqList.astro';
 import QuoteForm from '../../components/QuoteForm.astro';
-import { faqs } from '../../data/faq';
 
-const audiences = [
-  { t: 'Bodas y celebraciones', d: 'Un detalle útil para tus invitados, con vuestro nombre, fecha o diseño.' },
-  { t: 'Festivales', d: 'Merchandising práctico que se usa durante el evento y después.' },
-  { t: 'Universidades', d: 'Para fiestas, bienvenidas, asociaciones y actividades del campus.' },
-  { t: 'Locales de ocio', d: 'Bares, discotecas y salas que quieren ofrecer algo más a su público.' },
-  { t: 'Marcas y agencias', d: 'Acciones de marca y merchandising con un objeto que se usa de verdad.' },
-];
-const steps = [
-  { t: 'Cuéntanos tu idea', d: 'Rellena el formulario con tu evento, la cantidad aproximada y lo que quieres personalizar.' },
-  { t: 'Preparamos una propuesta', d: 'Revisamos la viabilidad y te enviamos una propuesta con presupuesto.' },
-  { t: 'Confirmamos diseño y pedido', d: 'Ajustamos el diseño contigo y lo confirmamos antes de producir.' },
-  { t: 'Producción y entrega', d: 'Fabricamos tu pedido y coordinamos la entrega.' },
-];
-const customFaqs = faqs.filter((f) => f.group === 'custom');
+const uses = [
+  { icon: 'rings', label: 'Bodas' },
+  { icon: 'music', label: 'Festivales' },
+  { icon: 'cap', label: 'Universidades' },
+  { icon: 'globe', label: 'Discotecas' },
+  { icon: 'sparkles', label: 'Marcas y eventos' },
+] as const;
 ---
 <Base
   title="Combata Custom | Protectores de bebidas personalizados"
-  description="Personaliza Combata con tu diseño, logo o mensaje para bodas, festivales, universidades, locales y acciones de marca. Solicita presupuesto."
+  description="Personaliza Combata con tu logo, diseño o mensaje para bodas, festivales, universidades, discotecas, marcas y eventos. Solicita presupuesto."
+  header="light"
 >
-  <section class="dark on-dark c-hero">
+  <section class="c-hero">
     <div class="container c-hero__grid">
       <div class="c-hero__copy">
-        <h1 class="h-hero c-hero__title">Combata Custom.</h1>
-        <p class="lead">Tu diseño, tu evento, tu Combata.</p>
-        <p class="muted c-hero__text">Personaliza nuestros protectores de bebidas para eventos, celebraciones y acciones de marca.</p>
-        <div class="btn-row">
-          <a class="btn btn-primary" href="#presupuesto">Solicitar presupuesto <Icon name="arrow" /></a>
-          <a class="btn btn-secondary" href="#proceso">Cómo funciona</a>
-        </div>
+        <h1 class="c-hero__title">Combata<br />Custom <img class="c-hero__rays" src={url('/brand/rayos.svg')} alt="" width="80" height="62" /></h1>
+        <p class="c-hero__lead">Personaliza Combata para tu<br />evento, marca o celebración.</p>
+        <ul role="list" class="checks">
+          <li><Icon name="check" /> Con tu logo, diseño o mensaje</li>
+          <li><Icon name="check" /> Ideal para bodas, festivales, universidades y discotecas</li>
+          <li><Icon name="check" /> Pedidos a medida y asesoramiento personalizado</li>
+        </ul>
+        <a class="btn btn-primary" href="#presupuesto">Solicitar presupuesto <Icon name="arrow" /></a>
       </div>
       <div class="c-hero__media">
-        <Placeholder label="Ejemplo de personalización: Combata con logo" note="Mockup o ejemplo real pendiente" tone="lavender" ratio="1 / 1" sticker={url('/brand/rayos.svg')} />
+        <img src={url('/img/custom_hero.jpg')} alt="Vaso con tapa Combata lavanda personalizada con el texto «Tu logo»" width="1056" height="870" fetchpriority="high" />
       </div>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="what-custom">
-    <div class="container split2">
-      <div>
-        <p class="index">01</p>
-        <h2 id="what-custom" class="h-1">Qué puedes personalizar</h2>
-      </div>
-      <div class="opts">
-        <div><h3 class="h-2">Tu logo</h3><p class="muted">Para marcas, locales, festivales e instituciones.</p></div>
-        <div><h3 class="h-2">Tu diseño</h3><p class="muted">Una ilustración, un patrón o la identidad de tu evento.</p></div>
-        <div><h3 class="h-2">Tu mensaje</h3><p class="muted">Un nombre, una fecha o una frase.</p></div>
-        <p class="small muted opts__note">Las técnicas de impresión, colores y tamaños de marcaje dependen de las posibilidades reales de producción. Te lo concretamos en la propuesta. <Pending label="Especificaciones pendientes" /></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section paper" aria-labelledby="who">
+  <section class="uses-sec" aria-label="Para quién">
     <div class="container">
-      <p class="index">02</p>
-      <h2 id="who" class="h-1 who__title">Para quién</h2>
-      <ul role="list" class="aud">
-        {audiences.map((a) => (
-          <li class="reveal"><h3 class="h-3">{a.t}</h3><p class="muted">{a.d}</p></li>
+      <ul role="list" class="uses">
+        {uses.map((u) => (
+          <li><Icon name={u.icon} /><span>{u.label}</span></li>
         ))}
       </ul>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="examples">
-    <div class="container">
-      <div class="ex__head">
-        <div><p class="index">03</p><h2 id="examples" class="h-1">Ejemplos</h2></div>
-        <p class="muted ex__text">Aquí mostraremos ejemplos reales de pedidos personalizados. Las simulaciones se identificarán como «Ejemplo de personalización».</p>
-      </div>
-      <div class="ex__grid">
-        <Placeholder label="Ejemplo de personalización · Boda" note="Pendiente" tone="sand" ratio="4 / 5" />
-        <Placeholder label="Ejemplo de personalización · Festival" note="Pendiente" tone="purple" ratio="4 / 5" />
-        <Placeholder label="Ejemplo de personalización · Marca" note="Pendiente" tone="lavender" ratio="4 / 5" />
-      </div>
-    </div>
-  </section>
-
-  <section class="section dark on-dark" id="proceso" aria-labelledby="process">
-    <div class="container">
-      <div class="proc__head">
-        <h2 id="process" class="h-1">Cómo funciona</h2>
-        <Pending label="Ajustar al proceso operativo real" />
-      </div>
-      <ol role="list" class="proc">
-        {steps.map((s, i) => (
-          <li class="reveal"><span class="proc__n">{String(i + 1).padStart(2, '0')}</span><h3 class="h-3">{s.t}</h3><p class="muted">{s.d}</p></li>
-        ))}
-      </ol>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="b2b-faq">
-    <div class="container split2">
-      <div><h2 id="b2b-faq" class="h-1">Preguntas frecuentes</h2></div>
-      <FaqList items={customFaqs} />
-    </div>
-  </section>
-
-  <section class="section paper" id="presupuesto" aria-labelledby="quote-title">
-    <div class="container split2">
-      <div class="q-intro">
-        <p class="eyebrow">Presupuesto</p>
-        <h2 id="quote-title" class="h-1">Cuéntanos tu idea.</h2>
-        <p class="muted">Cuantos más detalles nos des, más ajustada será la propuesta. Te respondemos por email.</p>
+  <section class="section" id="presupuesto" aria-labelledby="quote-title">
+    <div class="container q">
+      <div class="q__intro">
+        <h2 id="quote-title" class="q__title">Solicita tu presupuesto</h2>
+        <p class="muted">Cuéntanos tu idea, el tipo de evento y la cantidad aproximada. Te respondemos por email con una propuesta.</p>
       </div>
       <QuoteForm />
     </div>
@@ -119,40 +57,43 @@ const customFaqs = faqs.filter((f) => f.group === 'custom');
 </Base>
 
 <style>
-  .c-hero { padding-block: clamp(3rem, 6vw, 6rem); }
-  .c-hero__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
-  .c-hero__copy { display: grid; gap: 1.5rem; justify-items: start; }
-  .c-hero__title { font-size: clamp(3rem, 1.5rem + 6vw, 6.25rem); }
-  .c-hero .lead { font-weight: 600; }
-  .c-hero__text { max-width: 44ch; margin-top: -.5rem; }
-  .split2 { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 6vw, 6rem); }
-  .split2 > div:first-child { display: grid; gap: 1rem; align-content: start; }
-  .opts { display: grid; gap: 0; }
-  .opts > div { padding: 1.5rem 0; border-bottom: 1px solid var(--color-line); display: grid; grid-template-columns: 1fr 1.3fr; gap: 1rem; align-items: baseline; }
-  .opts > div:first-child { border-top: 1px solid var(--color-line); }
-  .opts__note { margin-top: 1.25rem; }
-  .who__title { margin: 1rem 0 clamp(2rem, 4vw, 3.5rem); }
-  .aud { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; }
-  .aud li { border-top: 1.5px solid var(--color-purple); padding-top: 1.25rem; display: grid; gap: .6rem; align-content: start; }
-  .ex__head { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 6vw, 6rem); align-items: end; margin-bottom: clamp(2rem, 4vw, 3rem); }
-  .ex__head > div { display: grid; gap: 1rem; }
-  .ex__text { max-width: 52ch; }
-  .ex__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-  .proc__head { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
-  .proc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-  .proc li { border-top: 1px solid rgba(245,244,238,.25); padding-top: 1.25rem; display: grid; gap: .6rem; align-content: start; }
-  .proc__n { font-size: var(--step-3); font-weight: 700; color: var(--color-lime); letter-spacing: -.03em; }
-  .q-intro { position: sticky; top: calc(var(--header-h) + 2rem); }
-  @media (max-width: 1000px) { .aud { grid-template-columns: repeat(2, 1fr); } .proc { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 860px) {
-    .c-hero__grid, .split2, .ex__head { grid-template-columns: 1fr; }
-    .c-hero__media { max-width: 460px; }
-    .q-intro { position: static; }
-    .ex__grid { grid-template-columns: 1fr 1fr; }
-    .ex__grid > :last-child { display: none; }
+  .c-hero { background: #F7F0EA; overflow: hidden; }
+  .c-hero__grid { display: grid; grid-template-columns: 1fr 1.05fr; align-items: center; gap: clamp(1.5rem, 4vw, 3rem); }
+  .c-hero__copy { display: grid; gap: 1.25rem; justify-items: start; padding-block: clamp(2.5rem, 6vw, 5rem); }
+  .c-hero__title { font-size: clamp(3rem, 1.8rem + 4.4vw, 5.5rem); line-height: .98; letter-spacing: -.04em; position: relative; }
+  .c-hero__rays { display: inline-block; width: .8em; height: auto; vertical-align: top; margin-left: .1em; transform: translateY(-.15em) rotate(4deg); }
+  .c-hero__lead { font-size: var(--step-2); line-height: 1.3; font-weight: 500; letter-spacing: -.015em; }
+  .checks { display: grid; gap: .65rem; }
+  .checks li { display: flex; gap: .7rem; align-items: flex-start; font-weight: 500; max-width: 34ch; line-height: 1.4; }
+  .checks :global(svg) { width: 1.35rem; height: 1.35rem; flex: none; color: #A7C400; stroke-width: 2.6; margin-top: .05rem; }
+  .c-hero .btn { margin-top: .75rem; }
+  .c-hero__media { align-self: stretch; display: flex; align-items: center; justify-content: flex-end; }
+  .c-hero__media img {
+    width: 100%; max-width: 720px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 90%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 10%, #000 88%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 90%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 10%, #000 88%, transparent 100%);
+    mask-composite: intersect;
   }
-  @media (max-width: 560px) {
-    .aud, .proc { grid-template-columns: 1fr; }
-    .opts > div { grid-template-columns: 1fr; gap: .25rem; }
+
+  .uses-sec { padding-block: clamp(1.5rem, 3vw, 2.25rem); background: var(--color-cream); }
+  .uses { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+  .uses li {
+    display: grid; justify-items: center; gap: .9rem; padding: 1.75rem 1rem 1.5rem; text-align: center;
+    background: var(--color-paper); border-radius: var(--radius-l); box-shadow: 0 1px 0 rgba(26,11,61,.06), 0 6px 18px rgba(26,11,61,.05);
+    font-weight: 700; font-size: var(--step--1);
   }
+  .uses :global(svg) { width: 44px; height: 44px; stroke-width: 1.5; }
+
+  .q { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 6vw, 6rem); }
+  .q__intro { display: grid; gap: 1rem; align-content: start; position: sticky; top: calc(var(--header-h) + 2rem); }
+  .q__title { font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.5rem); letter-spacing: -.035em; line-height: 1; }
+
+  @media (max-width: 900px) {
+    .c-hero__grid, .q { grid-template-columns: 1fr; }
+    .c-hero__copy { padding-bottom: 0; }
+    .q__intro { position: static; }
+    .uses { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 520px) { .uses { grid-template-columns: 1fr 1fr; } }
 </style>

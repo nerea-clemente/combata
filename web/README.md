@@ -27,6 +27,16 @@ En `src/data/site.ts`:
 - `SHOW_PENDING = true` muestra etiquetas «Pendiente» sobre lo que falta por confirmar. Ponlo en `false` al publicar.
 - `PRELAUNCH = true` añade `noindex` para que los buscadores no indexen la web. Ponlo en `false` al publicar.
 
+## Diseño aplicado
+
+La web sigue el diseño visual aprobado (inicio, ficha de producto y Combata Custom), con sus imágenes
+recortadas del diseño en `public/img/`. Son imágenes conceptuales de baja resolución: sustituirlas por
+fotos reales del producto en cuanto existan (mismos nombres de archivo).
+
+Precio (3,99 €), packs (3 y 5), colores, «Se adapta a la mayoría de vasos» y «Envío en 24–48 h» salen
+del diseño: confirmarlos antes del lanzamiento en `src/data/site.ts`. Las valoraciones (estrellas y
+nº de reseñas) solo se muestran si se rellenan con reseñas reales en `product.reviews`.
+
 ## Qué falta para publicar
 
 | Pendiente | Dónde se configura |

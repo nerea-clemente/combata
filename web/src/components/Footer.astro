@@ -1,6 +1,6 @@
 ---
 import { url } from '../data/url';
-import { nav, legal, site } from '../data/site';
+import { nav, legal, site, SHOW_PENDING } from '../data/site';
 import Pending from './Pending.astro';
 const year = new Date().getFullYear();
 ---
@@ -25,13 +25,13 @@ const year = new Date().getFullYear();
             {legal.map((l) => <li><a href={url(`/legal/${l.slug}`)}>{l.label}</a></li>)}
           </ul>
         </div>
-        <div>
+        {(site.contact.email || site.social.length > 0 || SHOW_PENDING) && <div>
           <h2 class="site-footer__h">Contacto</h2>
           <ul role="list">
             {site.contact.email ? <li><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></li> : <li><Pending label="Correo pendiente" /></li>}
             {site.social.length ? site.social.map((s) => <li><a href={s.href} rel="noopener">{s.label}</a></li>) : <li><Pending label="Redes pendientes" /></li>}
           </ul>
-        </div>
+        </div>}
       </nav>
     </div>
     <div class="site-footer__bottom small">

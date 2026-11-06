@@ -2,13 +2,15 @@
 import { url, stripBase } from '../data/url';
 import { nav } from '../data/site';
 import Icon from './Icon.astro';
+interface Props { theme?: 'dark' | 'light' }
+const { theme = 'dark' } = Astro.props;
 const path = stripBase(Astro.url.pathname).replace(/\/$/, '') || '/';
 const isCurrent = (href: string) => path === href || path.startsWith(href + '/') || (href === '/comprar' && path.startsWith('/productos'));
 ---
-<header class="site-header" data-header>
+<header class:list={["site-header", `site-header--${theme}`]} data-header>
   <div class="container site-header__inner">
     <a href={url('/')} class="site-header__logo" aria-label="Combata, ir al inicio">
-      <img src={url('/brand/logo_combata_principal.svg')} alt="Combata" width="160" height="33" />
+      <img src={url(theme === 'dark' ? '/brand/logo_combata_blanco.svg' : '/brand/logo_combata_principal.svg')} alt="Combata" width="160" height="33" />
     </a>
     <nav class="site-nav" aria-label="Principal">
       <ul role="list">
@@ -51,11 +53,18 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + '/')
     border-bottom: 1px solid transparent; transition: border-color .2s;
   }
   .site-header.is-scrolled { border-bottom-color: var(--color-line); }
+  .site-header--dark { background: var(--color-night); color: var(--color-cream); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .site-header--dark.is-scrolled { border-bottom-color: rgba(245,244,238,.12); }
+  .site-header--dark .site-nav a::after { box-shadow: none; }
+  .site-header--dark .icon-btn { color: var(--color-cream); }
+  .site-header--dark .icon-btn:hover { background: rgba(245,244,238,.1); }
+  .site-header--dark .cart-count { border-color: var(--color-night); }
+  .site-header--dark .mobile-menu { color: var(--color-purple); }
   .site-header__inner { height: var(--header-h); display: flex; align-items: center; gap: 2rem; }
   .site-header__logo img { height: 30px; width: auto; }
   .site-nav { margin-left: auto; }
   .site-nav ul { display: flex; gap: 2rem; }
-  .site-nav a { text-decoration: none; font-weight: 500; font-size: .9375rem; padding: .5rem 0; position: relative; }
+  .site-nav a { text-decoration: none; font-weight: 600; font-size: .9375rem; padding: .5rem 0; position: relative; }
   .site-nav a::after {
     content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; border-radius: 3px;
     background: var(--color-lime); box-shadow: 0 0 0 1px var(--color-purple); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease);

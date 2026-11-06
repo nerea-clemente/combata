@@ -1,7 +1,6 @@
 ---
 import { url } from '../data/url';
 import Base from '../layouts/Base.astro';
-import Placeholder from '../components/Placeholder.astro';
 import Pending from '../components/Pending.astro';
 import Icon from '../components/Icon.astro';
 import { product, formatPrice } from '../data/site';
@@ -15,14 +14,14 @@ const price = formatPrice(product.price);
     </header>
 
     <a class="card" href={url(product.href)}>
-      <Placeholder label="Combata Original sobre fondo limpio" note="Foto de producto pendiente" tone="sand" ratio="4 / 3" />
+      <div class="card__media"><img src={url('/img/tapas_apiladas.jpg')} alt="Tapas Combata apiladas en lima, rosa y lavanda" width="900" height="666" /></div>
       <div class="card__body">
         <div>
           <h2 class="h-2">{product.name}</h2>
           <p class="muted">{product.short}</p>
         </div>
         <div class="card__meta">
-          <p class="card__price">{price ?? <>Precio por confirmar <Pending label="Pendiente" /></>}</p>
+          <p class="card__price">Desde {price ?? <>— <Pending label="Pendiente" /></>}</p>
           <div class="card__swatches" aria-label="Colores">
             {product.colours.map((c) => <span style={`background:${c.hex}`} title={c.name}></span>)}
           </div>
@@ -41,6 +40,9 @@ const price = formatPrice(product.price);
   .shop { padding-block: clamp(2.5rem, 5vw, 4.5rem) var(--section); }
   .shop__head { display: grid; gap: .75rem; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
   .card { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(1.5rem, 4vw, 4rem); text-decoration: none; align-items: center; }
+  .card__media { background: #F5EDEA; border-radius: var(--radius-l); overflow: hidden; }
+  .card__media img { width: 100%; transition: transform .4s var(--ease); }
+  .card:hover .card__media img { transform: scale(1.03); }
   .card__body { display: grid; gap: 2rem; }
   .card__body .h-2 { margin-bottom: .5rem; }
   .card:hover .h-2 { text-decoration: underline; text-decoration-color: var(--color-lime); text-decoration-thickness: 4px; text-underline-offset: 6px; }
