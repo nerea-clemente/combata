@@ -1,143 +1,172 @@
 ---
 import { url } from '../data/url';
 import Base from '../layouts/Base.astro';
-import Icon from '../components/Icon.astro';
-import Underline from '../components/Underline.astro';
 import { product } from '../data/site';
+
+const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 ---
 <Base
   title="Combata | Protectores reutilizables para bebidas"
   description="Descubre Combata, el protector reutilizable para tu bebida. Elige tu color o personalízalo para tu evento, festival o celebración."
+  frame={558}
 >
   <!-- HERO -->
-  <section class="hero on-dark">
-    <div class="container hero__grid">
-      <div class="hero__copy">
-        <h1 class="hero__title">Ponle un <span class="u">Combata.<Underline /></span></h1>
-        <p class="hero__text">El protector reutilizable para tu bebida. Menos derrames, más tranquilidad y toda la fiesta por delante.</p>
-        <div class="btn-row">
-          <a class="btn btn-primary" href={url(product.href)}>Comprar ahora <Icon name="arrow" /></a>
-          <a class="btn btn-ghost" href={url('/custom')}>Personalizar <Icon name="arrow" /></a>
-        </div>
-      </div>
-      <div class="hero__media">
-        <img src={url('/img/hero_vaso.jpg')} alt="Vaso con una tapa Combata lima y pajita" width="756" height="1128" fetchpriority="high" />
-      </div>
+  <section class="hero">
+    <div class="frame hero__frame">
+      <h1 class="hero__title">Ponle un<br />Combata.</h1>
+      <svg class="hero__line" viewBox="0 0 180 28" aria-hidden="true"><path d="M6 22 C 60 15, 120 9, 174 7" stroke="#D9FF00" stroke-width="8.5" stroke-linecap="round" fill="none"/></svg>
+      <p class="hero__text"><span class="d">El protector reutilizable para tu bebida.<br />Menos derrames, más tranquilidad<br />y toda la fiesta por delante.</span><span class="mo">El protector reutilizable<br />para tu bebida.</span></p>
+      <a class="pill pill--lime hero__b1" href={url(product.href)}>Comprar ahora <Fragment set:html={arrow} /></a>
+      <a class="pill pill--line hero__b2" href={url('/custom')}>Personalizar <Fragment set:html={arrow} /></a>
+      <img class="hero__img" src={url('/img/hero_vaso.jpg')} alt="Vaso con una tapa Combata lima y pajita" width="756" height="1128" fetchpriority="high" />
     </div>
   </section>
 
   <!-- BENEFICIOS -->
   <section class="benefits" aria-label="Beneficios">
-    <div class="container">
-      <ul role="list" class="benefits__list">
-        <li>
-          <Icon name="shield" class="benefits__icon" />
-          <h2>Una barrera<br />adicional</h2>
-          <p>Añade una capa extra<br />de protección a tu bebida.</p>
-        </li>
-        <li>
-          <Icon name="drop" class="benefits__icon" />
-          <h2>Menos<br />derrames</h2>
-          <p>Disfruta sin preocuparte<br />por salpicaduras.</p>
-        </li>
-        <li>
-          <Icon name="refresh" class="benefits__icon" />
-          <h2>Reutilizable<br />y duradero</h2>
-          <p>Úsalo, lávalo<br />y llévalo contigo.</p>
-        </li>
-      </ul>
+    <div class="frame benefits__frame">
+      <div class="ben ben--1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.4-7.5 9.5-4.3-1.1-7.5-4.9-7.5-9.5V6L12 3z"/></svg>
+        <h2>Una barrera<br />adicional</h2>
+        <p>Añade una capa extra<br />de protección a tu bebida.</p>
+      </div>
+      <div class="ben ben--2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2c3.4 4.3 6 7.8 6 11a6 6 0 0 1-12 0c0-3.2 2.6-6.7 6-11z"/></svg>
+        <h2>Menos<br />derrames</h2>
+        <p>Disfruta sin preocuparte<br />por salpicaduras.</p>
+      </div>
+      <div class="ben ben--3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.6L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.6L20 16M20 20v-4h-4"/></svg>
+        <h2>Reutilizable<br />y duradero</h2>
+        <p>Úsalo, lávalo<br />y llévalo contigo.</p>
+      </div>
     </div>
   </section>
 
   <!-- DESCUBRE -->
   <section class="discover" aria-labelledby="discover-title">
-    <div class="container discover__grid">
-      <div class="discover__media">
-        <img src={url('/img/tapas_apiladas.jpg')} alt="Tres tapas Combata apiladas en lima, rosa y lavanda" width="900" height="666" loading="lazy" />
-      </div>
-      <div class="discover__copy">
-        <h2 id="discover-title" class="sec-title">Descubre<br />Combata</h2>
-        <p class="sec-text">Elige tu color, combina<br />y llévate tu pack favorito.</p>
-        <a class="btn btn-primary" href={url('/comprar')}>Ver productos <Icon name="arrow" /></a>
-      </div>
+    <div class="frame discover__frame">
+      <img class="discover__img" src={url('/img/tapas_apiladas.jpg')} alt="Tres tapas Combata apiladas en lima, rosa y lavanda" width="900" height="666" loading="lazy" />
+      <h2 id="discover-title" class="discover__title">Descubre<br />Combata</h2>
+      <p class="discover__text">Elige tu color, combina<br />y llévate tu pack favorito.</p>
+      <a class="pill pill--lime discover__btn" href={url('/comprar')}>Ver productos <Fragment set:html={arrow} /></a>
     </div>
   </section>
 
   <!-- CUSTOM -->
-  <section class="custom-band on-dark" aria-labelledby="custom-title">
-    <svg class="custom-band__wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0 90 V52 C 240 4, 420 0, 640 30 C 900 66, 1150 70, 1440 10 V90 Z" fill="currentColor" />
-    </svg>
-    <div class="container custom-band__grid">
-      <div class="custom-band__copy">
-        <h2 id="custom-title" class="sec-title">Combata Custom</h2>
-        <p class="sec-text">Personalízalo para tu evento,<br />marca o celebración.</p>
-        <a class="btn btn-ghost" href={url('/custom#presupuesto')}>Solicitar presupuesto <Icon name="arrow" /></a>
-      </div>
-      <div class="custom-band__media">
-        <img src={url('/img/custom_vaso.jpg')} alt="Vaso con tapa Combata lavanda personalizada con el texto «Tu logo»" width="684" height="498" loading="lazy" />
-      </div>
+  <section class="custom" aria-labelledby="custom-title">
+    <svg class="custom__bg" viewBox="0 0 558 200" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="cg" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#1E0730"/><stop offset=".6" stop-color="#28083A"/><stop offset="1" stop-color="#2F093F"/></linearGradient>
+        </defs>
+        <path d="M0 38 Q0 28 12 28 C 110 24 190 33 262 29 C 330 25 385 12 452 9 C 500 7 538 7 550 11 Q558 14 558 24 V200 H0 Z" fill="url(#cg)"/>
+      </svg>
+    <div class="frame custom__frame">
+      <h2 id="custom-title" class="custom__title">Combata Custom</h2>
+      <p class="custom__text">Personalízalo para tu evento,<br />marca o celebración.</p>
+      <a class="pill pill--line custom__btn" href={url('/custom#presupuesto')}>Solicitar presupuesto <Fragment set:html={arrow} /></a>
+      <img class="custom__img" src={url('/img/custom_vaso.jpg')} alt="Vaso con tapa Combata lavanda personalizada con el texto «Tu logo»" width="684" height="498" loading="lazy" />
     </div>
   </section>
 </Base>
 
 <style>
-  /* HERO */
-  .hero { background: var(--hero-grad); color: var(--color-cream); overflow: hidden; }
-  .hero__grid { display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: 2rem; min-height: min(78vh, 720px); }
-  .hero__copy { display: grid; gap: 1.75rem; justify-items: start; padding-block: clamp(3rem, 7vw, 6rem); }
-  .hero__title { font-size: clamp(3.25rem, 1.8rem + 5.6vw, 6.5rem); line-height: .98; letter-spacing: -.04em; color: #fff; }
-  .u { position: relative; display: inline-block; isolation: isolate; white-space: nowrap; }
-  .hero__text { font-size: var(--step-1); line-height: 1.5; max-width: 30ch; color: rgba(255, 255, 255, .92); margin-top: .75rem; }
-  .hero__media { align-self: end; justify-self: end; height: 100%; display: flex; align-items: flex-end; }
-  .hero__media img {
-    width: auto; max-height: min(78vh, 720px); object-fit: contain;
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 18%, #000 88%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 14%);
-    -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent 0, #000 18%, #000 88%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 14%);
-    mask-composite: intersect;
+  .frame { position: relative; width: calc(558 * var(--u)); margin-inline: auto; }
+  .pill {
+    position: absolute; display: inline-flex; align-items: center; justify-content: center; gap: calc(5 * var(--u));
+    height: calc(34 * var(--u)); border-radius: 999px; font-size: calc(12 * var(--u)); font-weight: 700; letter-spacing: -.01em; text-decoration: none; white-space: nowrap;
+    transition: background-color .2s, color .2s, transform .2s;
+  }
+  .pill :global(svg) { width: calc(12 * var(--u)); height: calc(12 * var(--u)); }
+  .pill:active { transform: translateY(1px); }
+  .pill--lime { background: #DFFF1A; color: #1A0B3D; }
+  .pill--lime:hover { background: #EAFF5C; }
+  .pill--line { color: #fff; border: calc(1.4 * var(--u)) solid rgba(255,255,255,.9); }
+  .pill--line:hover { background: #fff; color: #1A0B3D; }
+
+  /* HERO 558 x 375 */
+  .hero { background: linear-gradient(100deg, #170624 0%, #1F072D 35%, #2C0839 70%, #33093F 100%); overflow: hidden; }
+  .hero__frame { height: calc(375 * var(--u)); }
+  .hero__title { position: absolute; left: calc(34 * var(--u)); top: calc(51 * var(--u)); margin: 0; font-size: calc(49 * var(--u)); line-height: calc(50 * var(--u)); font-weight: 760; letter-spacing: -.035em; color: #fff; z-index: 2; }
+  .hero__line { position: absolute; left: calc(52 * var(--u)); top: calc(148 * var(--u)); width: calc(180 * var(--u)); height: calc(28 * var(--u)); z-index: 2; overflow: visible; }
+  .hero__text { position: absolute; left: calc(34 * var(--u)); top: calc(196 * var(--u)); width: calc(290 * var(--u)); margin: 0; font-size: calc(14.6 * var(--u)); line-height: calc(21 * var(--u)); color: rgba(255,255,255,.93); z-index: 2; }
+  .hero__text .mo { display: none; }
+  .hero__b1 { left: calc(34 * var(--u)); top: calc(284 * var(--u)); width: calc(139 * var(--u)); z-index: 2; }
+  .hero__b2 { left: calc(185 * var(--u)); top: calc(284 * var(--u)); width: calc(122 * var(--u)); z-index: 2; }
+  .hero__img {
+    position: absolute; right: calc(8 * var(--u)); top: calc(-1 * var(--u)); width: calc(244 * var(--u)); height: calc(376 * var(--u)); object-fit: cover;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 12%); mask-image: linear-gradient(to right, transparent 0, #000 12%);
   }
 
-  /* BENEFICIOS */
-  .benefits { background: var(--color-cream); padding-block: clamp(2.5rem, 5vw, 3.75rem); border-bottom: 1px solid var(--color-line); }
-  .benefits__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center; }
-  .benefits__list li { display: grid; justify-items: center; gap: .6rem; }
-  .benefits__list :global(.benefits__icon) { width: 44px; height: 44px; stroke-width: 1.6; margin-bottom: .4rem; }
-  .benefits__list h2 { font-size: var(--step-1); line-height: 1.15; letter-spacing: -.02em; }
-  .benefits__list p { font-size: var(--step--1); line-height: 1.45; }
+  /* BENEFICIOS 558 x 157 */
+  .benefits { background: #F6F2EE; }
+  .benefits__frame { height: calc(157 * var(--u)); }
+  .ben { position: absolute; top: calc(20 * var(--u)); width: calc(180 * var(--u)); transform: translateX(-50%); text-align: center; color: #1A0B3D; }
+  .ben--1 { left: calc(109 * var(--u)); } .ben--2 { left: calc(286 * var(--u)); } .ben--3 { left: calc(459 * var(--u)); }
+  .ben svg { width: calc(37 * var(--u)); height: calc(37 * var(--u)); display: block; margin: 0 auto; }
+  .ben h2 { margin: calc(8 * var(--u)) 0 0; font-size: calc(15 * var(--u)); line-height: calc(17 * var(--u)); font-weight: 700; letter-spacing: -.02em; }
+  .ben p { margin: calc(8 * var(--u)) 0 0; font-size: calc(11 * var(--u)); line-height: calc(15.5 * var(--u)); }
 
-  /* DESCUBRE */
-  .discover { background: #F5EDEA; overflow: hidden; }
-  .discover__grid { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: clamp(1.5rem, 4vw, 4rem); padding-block: clamp(1.5rem, 3vw, 2.5rem); }
-  .discover__media img { width: 100%; -webkit-mask-image: radial-gradient(75% 75% at 50% 50%, #000 70%, transparent 100%); mask-image: radial-gradient(75% 75% at 50% 50%, #000 70%, transparent 100%); }
-  .discover__copy { display: grid; gap: 1.5rem; justify-items: start; }
-  .sec-title { font-size: clamp(2.5rem, 1.6rem + 3.2vw, 4.25rem); line-height: 1; letter-spacing: -.035em; }
-  .sec-text { font-size: var(--step-2); line-height: 1.3; font-weight: 500; letter-spacing: -.015em; }
+  /* DESCUBRE 558 x 250 */
+  .discover { background: #F5EEE9; }
+  .discover__frame { height: calc(214 * var(--u)); }
+  .discover__img { position: absolute; left: calc(10 * var(--u)); top: calc(3 * var(--u)); width: calc(300 * var(--u)); height: calc(222 * var(--u)); object-fit: cover;
+    -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000 72%, transparent 100%); mask-image: radial-gradient(70% 70% at 50% 50%, #000 72%, transparent 100%); }
+  .discover__title { position: absolute; left: calc(321 * var(--u)); top: calc(36 * var(--u)); margin: 0; font-size: calc(32 * var(--u)); line-height: calc(33 * var(--u)); font-weight: 760; letter-spacing: -.035em; color: #1A0B3D; }
+  .discover__text { position: absolute; left: calc(322 * var(--u)); top: calc(112 * var(--u)); margin: 0; font-size: calc(14.6 * var(--u)); line-height: calc(19 * var(--u)); color: #1A0B3D; font-weight: 500; }
+  .discover__btn { left: calc(322 * var(--u)); top: calc(169 * var(--u)); width: calc(149 * var(--u)); height: calc(33 * var(--u)); }
 
-  /* CUSTOM */
-  .custom-band { position: relative; background: #250833; color: var(--color-cream); margin-top: -1px; }
-  .custom-band__wave { position: absolute; left: 0; right: 0; top: -60px; width: 100%; height: 61px; color: #250833; display: block; }
-  .discover { padding-bottom: 60px; }
-  .custom-band__grid { display: grid; grid-template-columns: 1.1fr 1fr; align-items: end; gap: 2rem; }
-  .custom-band__copy { display: grid; gap: 1.25rem; justify-items: start; padding-block: clamp(2.5rem, 5vw, 4rem); align-self: center; }
-  .custom-band .sec-title { color: #fff; }
-  .custom-band .sec-text { color: rgba(255, 255, 255, .9); font-size: var(--step-1); }
-  .custom-band__media { justify-self: end; }
-  .custom-band__media img {
-    width: min(100%, 560px);
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22%, #000 85%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 18%);
-    -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent 0, #000 22%, #000 85%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 18%);
-    mask-composite: intersect;
-  }
+  /* CUSTOM 558 x 198 (incluye la onda) */
+  .custom { position: relative; background: #F5EEE9; }
+  .custom__frame { height: calc(198 * var(--u)); color: #fff; }
+  .custom__bg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .custom__title { position: absolute; left: calc(35 * var(--u)); top: calc(55 * var(--u)); margin: 0; font-size: calc(31 * var(--u)); line-height: calc(34 * var(--u)); font-weight: 760; letter-spacing: -.03em; color: #fff; }
+  .custom__text { position: absolute; left: calc(35 * var(--u)); top: calc(91 * var(--u)); margin: 0; font-size: calc(14.2 * var(--u)); line-height: calc(19 * var(--u)); color: rgba(255,255,255,.92); }
+  .custom__btn { left: calc(35 * var(--u)); top: calc(142 * var(--u)); width: calc(198 * var(--u)); }
+  .custom__img { position: absolute; right: calc(8 * var(--u)); bottom: 0; width: calc(228 * var(--u)); height: calc(166 * var(--u)); object-fit: cover;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16%), linear-gradient(to bottom, transparent 0, #000 14%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent 0, #000 16%), linear-gradient(to bottom, transparent 0, #000 14%); mask-composite: intersect; }
 
-  @media (max-width: 820px) {
-    .hero__grid { grid-template-columns: 1fr; min-height: 0; gap: 0; }
-    .hero__copy { padding-block: 2.5rem 1rem; }
-    .hero .btn-row { flex-direction: column; align-items: flex-start; }
-    .hero__media { justify-self: end; margin-right: calc(var(--gutter) * -1); }
-    .hero__media img { max-height: 420px; }
-    .benefits__list { grid-template-columns: 1fr; gap: 2.25rem; }
-    .discover__grid, .custom-band__grid { grid-template-columns: 1fr; }
-    .discover__copy { order: -1; padding-top: 2rem; }
-    .custom-band__media { margin-right: calc(var(--gutter) * -1); }
+
+  /* ===== MÓVIL (diseño de teléfono, 244 de ancho) ===== */
+  @media (max-width: 760px) {
+    .frame { width: 100%; }
+    .hero { background: linear-gradient(160deg, #1D0730 0%, #2A0838 60%, #300A3E 100%); }
+    .hero__frame { height: calc(387 * var(--m)); }
+    .hero__title { left: calc(14 * var(--m)); top: calc(25 * var(--m)); font-size: calc(36.5 * var(--m)); line-height: calc(37 * var(--m)); }
+    .hero__line { left: calc(28 * var(--m)); top: calc(103 * var(--m)); width: calc(152 * var(--m)); height: calc(24 * var(--m)); }
+    .hero__text { left: calc(14 * var(--m)); top: calc(144 * var(--m)); width: calc(200 * var(--m)); font-size: calc(12.8 * var(--m)); line-height: calc(19 * var(--m)); }
+    .hero__text .d { display: none; } .hero__text .mo { display: inline; }
+    .pill { height: calc(33 * var(--m)); font-size: calc(11.5 * var(--m)); gap: calc(4 * var(--m)); }
+    .pill :global(svg) { width: calc(11 * var(--m)); height: calc(11 * var(--m)); }
+    .pill--line { border-width: calc(1.2 * var(--m)); }
+    .hero__b1 { left: calc(14 * var(--m)); top: calc(207 * var(--m)); width: calc(133 * var(--m)); }
+    .hero__b2 { left: calc(14 * var(--m)); top: calc(256 * var(--m)); width: calc(121 * var(--m)); }
+    .hero__img { right: auto; left: calc(124 * var(--m)); top: calc(126 * var(--m)); width: calc(167 * var(--m)); height: calc(257 * var(--m)); -webkit-mask-image: linear-gradient(to right, transparent 0, #000 10%); mask-image: linear-gradient(to right, transparent 0, #000 10%); }
+
+    .benefits__frame, .discover__frame, .custom__frame { height: auto; }
+    .benefits__frame { display: grid; gap: 28px; padding: 36px var(--gutter); }
+    .ben { position: static; transform: none; width: auto; }
+    .ben svg { width: 38px; height: 38px; }
+    .ben h2 { margin-top: 10px; font-size: 18px; line-height: 1.2; }
+    .ben p { margin-top: 6px; font-size: 14px; line-height: 1.45; }
+
+    .discover__frame { display: grid; gap: 16px; padding: 40px var(--gutter) 70px; }
+    .discover__img, .discover__title, .discover__text, .discover__btn { position: static; }
+    .discover__img { width: 100%; height: auto; order: 4; }
+    .discover__title { font-size: 40px; line-height: 1.02; }
+    .discover__text { font-size: 18px; line-height: 1.35; }
+    .discover__btn { width: max-content; padding: 0 22px; height: 46px; font-size: 15px; }
+
+    .custom { background: #22072F; position: relative; }
+    .custom__frame { display: grid; gap: 14px; padding: 30px var(--gutter) 0; }
+    .custom__bg { inset: -40px 0 auto 0; height: 80px; width: 100%; }
+    .custom__title, .custom__text, .custom__btn, .custom__img { position: static; }
+    .custom__title { font-size: 36px; line-height: 1.05; position: relative; }
+    .custom__text { font-size: 17px; line-height: 1.4; position: relative; }
+    .custom__btn { width: max-content; padding: 0 22px; height: 46px; font-size: 15px; position: relative; }
+    .custom__img { width: 100%; height: auto; margin-top: 10px; justify-self: end; }
+    .discover .pill :global(svg), .custom .pill :global(svg) { width: 15px; height: 15px; }
   }
 </style>

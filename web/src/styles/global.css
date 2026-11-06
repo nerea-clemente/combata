@@ -42,6 +42,11 @@
   --header-h: 72px;
 
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Escala del diseño: 1u = 1 px del diseño de referencia, ajustado al ancho de pantalla. */
+  --fw: 625;
+  --u: min(calc(100vw / var(--fw)), 2.1px);
+  --m: calc(100vw / 244);
 }
 
 /* ---------- reset ---------- */

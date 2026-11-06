@@ -1,51 +1,60 @@
 ---
 import { url } from '../../data/url';
 import Base from '../../layouts/Base.astro';
-import Icon from '../../components/Icon.astro';
 import QuoteForm from '../../components/QuoteForm.astro';
 
+const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l4.5 4.5L19.5 7"/></svg>';
+const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const icons = {
+  rings: '<circle cx="8.5" cy="14.5" r="5.5"/><circle cx="15.5" cy="14.5" r="5.5"/><path d="M8 5.5l1.2-2h2.6l1.2 2-2.5 3z"/>',
+  music: '<path d="M9 18V5.5l11-2.5v12.5"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="15.5" r="2.5"/>',
+  cap: '<path d="M2 9.5l10-5 10 5-10 5-10-5z"/><path d="M6 11.5v4.8c3.5 2.6 8.5 2.6 12 0v-4.8M21.5 9.8v5"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/>',
+  sparkles: '<path d="M10 3l1.8 5.2L17 10l-5.2 1.8L10 17l-1.8-5.2L3 10l5.2-1.8zM18 14l.9 2.1L21 17l-2.1.9L18 20l-.9-2.1L15 17l2.1-.9z"/>',
+};
 const uses = [
-  { icon: 'rings', label: 'Bodas' },
-  { icon: 'music', label: 'Festivales' },
-  { icon: 'cap', label: 'Universidades' },
-  { icon: 'globe', label: 'Discotecas' },
-  { icon: 'sparkles', label: 'Marcas y eventos' },
+  { k: 'rings', t: 'Bodas', x: 12 },
+  { k: 'music', t: 'Festivales', x: 133 },
+  { k: 'cap', t: 'Universidades', x: 255 },
+  { k: 'globe', t: 'Discotecas', x: 377 },
+  { k: 'sparkles', t: 'Marcas y eventos', x: 499 },
 ] as const;
 ---
 <Base
   title="Combata Custom | Protectores de bebidas personalizados"
   description="Personaliza Combata con tu logo, diseño o mensaje para bodas, festivales, universidades, discotecas, marcas y eventos. Solicita presupuesto."
   header="light"
+  frame={625}
 >
-  <section class="c-hero">
-    <div class="container c-hero__grid">
-      <div class="c-hero__copy">
-        <h1 class="c-hero__title">Combata<br />Custom <img class="c-hero__rays" src={url('/brand/rayos.svg')} alt="" width="80" height="62" /></h1>
-        <p class="c-hero__lead">Personaliza Combata para tu<br />evento, marca o celebración.</p>
-        <ul role="list" class="checks">
-          <li><Icon name="check" /> Con tu logo, diseño o mensaje</li>
-          <li><Icon name="check" /> Ideal para bodas, festivales, universidades y discotecas</li>
-          <li><Icon name="check" /> Pedidos a medida y asesoramiento personalizado</li>
-        </ul>
-        <a class="btn btn-primary" href="#presupuesto">Solicitar presupuesto <Icon name="arrow" /></a>
-      </div>
-      <div class="c-hero__media">
-        <img src={url('/img/custom_hero.jpg')} alt="Vaso con tapa Combata lavanda personalizada con el texto «Tu logo»" width="1056" height="870" fetchpriority="high" />
-      </div>
+  <section class="hero">
+    <div class="frame hero__frame">
+      <h1 class="title">Combata<br />Custom</h1>
+      <svg class="rays" viewBox="0 0 40 44" aria-hidden="true"><g stroke="#D9FF00" stroke-width="4.6" stroke-linecap="round" fill="none"><path d="M8 4 L5 16"/><path d="M22 10 L13 23"/><path d="M34 22 L21 29"/></g></svg>
+      <p class="lead">Personaliza Combata para tu<br />evento, marca o celebración.</p>
+      <ul role="list" class="checks">
+        <li style="top:calc(0 * var(--u))"><Fragment set:html={check} />Con tu logo, diseño o mensaje</li>
+        <li style="top:calc(22 * var(--u))"><Fragment set:html={check} />Ideal para bodas, festivales,<br />universidades y discotecas</li>
+        <li style="top:calc(60 * var(--u))"><Fragment set:html={check} />Pedidos a medida y<br />asesoramiento personalizado</li>
+      </ul>
+      <a class="cta" href="#presupuesto">Solicitar presupuesto <Fragment set:html={arrow} /></a>
+      <img class="img" src={url('/img/custom_hero.jpg')} alt="Vaso con tapa Combata lavanda personalizada con el texto «Tu logo»" width="1056" height="870" fetchpriority="high" />
     </div>
   </section>
 
   <section class="uses-sec" aria-label="Para quién">
-    <div class="container">
+    <div class="frame uses__frame">
       <ul role="list" class="uses">
         {uses.map((u) => (
-          <li><Icon name={u.icon} /><span>{u.label}</span></li>
+          <li style={`left:calc(${u.x} * var(--u))`}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={icons[u.k]} />
+            <span>{u.t}</span>
+          </li>
         ))}
       </ul>
     </div>
   </section>
 
-  <section class="section" id="presupuesto" aria-labelledby="quote-title">
+  <section class="section quote-sec" id="presupuesto" aria-labelledby="quote-title">
     <div class="container q">
       <div class="q__intro">
         <h2 id="quote-title" class="q__title">Solicita tu presupuesto</h2>
@@ -57,43 +66,59 @@ const uses = [
 </Base>
 
 <style>
-  .c-hero { background: #F7F0EA; overflow: hidden; }
-  .c-hero__grid { display: grid; grid-template-columns: 1fr 1.05fr; align-items: center; gap: clamp(1.5rem, 4vw, 3rem); }
-  .c-hero__copy { display: grid; gap: 1.25rem; justify-items: start; padding-block: clamp(2.5rem, 6vw, 5rem); }
-  .c-hero__title { font-size: clamp(3rem, 1.8rem + 4.4vw, 5.5rem); line-height: .98; letter-spacing: -.04em; position: relative; }
-  .c-hero__rays { display: inline-block; width: .8em; height: auto; vertical-align: top; margin-left: .1em; transform: translateY(-.15em) rotate(4deg); }
-  .c-hero__lead { font-size: var(--step-2); line-height: 1.3; font-weight: 500; letter-spacing: -.015em; }
-  .checks { display: grid; gap: .65rem; }
-  .checks li { display: flex; gap: .7rem; align-items: flex-start; font-weight: 500; max-width: 34ch; line-height: 1.4; }
-  .checks :global(svg) { width: 1.35rem; height: 1.35rem; flex: none; color: #A7C400; stroke-width: 2.6; margin-top: .05rem; }
-  .c-hero .btn { margin-top: .75rem; }
-  .c-hero__media { align-self: stretch; display: flex; align-items: center; justify-content: flex-end; }
-  .c-hero__media img {
-    width: 100%; max-width: 720px;
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 90%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 10%, #000 88%, transparent 100%);
-    -webkit-mask-composite: source-in;
-    mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 90%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 10%, #000 88%, transparent 100%);
-    mask-composite: intersect;
+  .frame { position: relative; width: calc(625 * var(--u)); margin-inline: auto; }
+  .hero { background: #F7F0EA; overflow: hidden; }
+  .hero__frame { height: calc(290 * var(--u)); color: #1A0B3D; }
+  .title { position: absolute; left: calc(35 * var(--u)); top: calc(13 * var(--u)); margin: 0; font-size: calc(37 * var(--u)); line-height: calc(37 * var(--u)); font-weight: 760; letter-spacing: -.035em; }
+  .rays { position: absolute; left: calc(227 * var(--u)); top: calc(10 * var(--u)); width: calc(42 * var(--u)); height: calc(46 * var(--u)); }
+  .lead { position: absolute; left: calc(35 * var(--u)); top: calc(95 * var(--u)); margin: 0; font-size: calc(13.8 * var(--u)); line-height: calc(18 * var(--u)); font-weight: 500; }
+  .checks { position: absolute; left: calc(36 * var(--u)); top: calc(143 * var(--u)); list-style: none; padding: 0; margin: 0; width: calc(230 * var(--u)); }
+  .checks li { position: absolute; left: 0; display: flex; gap: calc(10 * var(--u)); font-size: calc(11.2 * var(--u)); line-height: calc(16 * var(--u)); font-weight: 500; white-space: nowrap; }
+  .checks li :global(svg) { width: calc(13 * var(--u)); height: calc(13 * var(--u)); flex: none; color: #B9D600; margin-top: calc(1.5 * var(--u)); }
+  .cta {
+    position: absolute; left: calc(35 * var(--u)); top: calc(251 * var(--u)); width: calc(207 * var(--u)); height: calc(34 * var(--u)); border-radius: 999px; background: #DFFF1A; color: #1A0B3D;
+    display: inline-flex; align-items: center; justify-content: center; gap: calc(6 * var(--u)); font-size: calc(12 * var(--u)); font-weight: 700; text-decoration: none;
   }
+  .cta:hover { background: #EAFF5C; }
+  .cta :global(svg) { width: calc(12 * var(--u)); height: calc(12 * var(--u)); }
+  .img { position: absolute; left: calc(267 * var(--u)); top: 0; width: calc(352 * var(--u)); height: calc(290 * var(--u)); object-fit: cover;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 10%); mask-image: linear-gradient(to right, transparent 0, #000 10%); }
 
-  .uses-sec { padding-block: clamp(1.5rem, 3vw, 2.25rem); background: var(--color-cream); }
-  .uses { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+  .uses-sec { background: #F7F2ED; }
+  .uses__frame { height: calc(120 * var(--u)); }
+  .uses { list-style: none; padding: 0; margin: 0; }
   .uses li {
-    display: grid; justify-items: center; gap: .9rem; padding: 1.75rem 1rem 1.5rem; text-align: center;
-    background: var(--color-paper); border-radius: var(--radius-l); box-shadow: 0 1px 0 rgba(26,11,61,.06), 0 6px 18px rgba(26,11,61,.05);
-    font-weight: 700; font-size: var(--step--1);
+    position: absolute; top: calc(16 * var(--u)); width: calc(110 * var(--u)); height: calc(92 * var(--u)); border-radius: calc(11 * var(--u)); background: #F3ECE6;
+    box-shadow: 0 0 0 1px rgba(26,11,61,.06), 0 calc(2 * var(--u)) calc(6 * var(--u)) rgba(26,11,61,.05);
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: calc(13 * var(--u)); padding-bottom: calc(15 * var(--u)); color: #1A0B3D;
   }
-  .uses :global(svg) { width: 44px; height: 44px; stroke-width: 1.5; }
+  .uses li:last-child { width: calc(112 * var(--u)); }
+  .uses svg { width: calc(31 * var(--u)); height: calc(31 * var(--u)); }
+  .uses span { font-size: calc(11 * var(--u)); font-weight: 700; }
 
+  .quote-sec { background: var(--color-cream); }
   .q { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 6vw, 6rem); }
-  .q__intro { display: grid; gap: 1rem; align-content: start; position: sticky; top: calc(var(--header-h) + 2rem); }
-  .q__title { font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.5rem); letter-spacing: -.035em; line-height: 1; }
+  .q__intro { display: grid; gap: 1rem; align-content: start; }
+  .q__title { font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.5rem); letter-spacing: -.035em; line-height: 1; font-weight: 760; }
 
-  @media (max-width: 900px) {
-    .c-hero__grid, .q { grid-template-columns: 1fr; }
-    .c-hero__copy { padding-bottom: 0; }
-    .q__intro { position: static; }
-    .uses { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 760px) {
+    .frame { width: 100%; }
+    .hero__frame { height: auto; display: grid; gap: 16px; padding: 32px var(--gutter) 0; }
+    .title, .rays, .lead, .checks, .checks li, .cta, .img { position: static; }
+    .title { font-size: 46px; line-height: 1; }
+    .rays { position: absolute; left: calc(var(--gutter) + 196px); top: 26px; width: 46px; height: 50px; }
+    .lead { font-size: 18px; line-height: 1.35; }
+    .checks { width: auto; display: grid; gap: 10px; }
+    .checks li { font-size: 15px; line-height: 1.4; white-space: normal; gap: 10px; }
+    .checks li :global(svg) { width: 18px; height: 18px; margin-top: 2px; }
+    .cta { width: max-content; height: 48px; padding: 0 24px; font-size: 15px; gap: 8px; margin-top: 6px; }
+    .cta :global(svg) { width: 15px; height: 15px; }
+    .img { width: calc(100% + 2 * var(--gutter)); max-width: none; height: auto; margin-inline: calc(var(--gutter) * -1); -webkit-mask-image: none; mask-image: none; }
+    .uses__frame { height: auto; padding: 20px var(--gutter); }
+    .uses { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .uses li { position: static; width: auto !important; height: 110px; border-radius: 14px; gap: 12px; padding-bottom: 16px; }
+    .uses li:last-child { grid-column: 1 / -1; }
+    .uses svg { width: 36px; height: 36px; } .uses span { font-size: 14px; }
+    .q { grid-template-columns: 1fr; }
   }
-  @media (max-width: 520px) { .uses { grid-template-columns: 1fr 1fr; } }
 </style>

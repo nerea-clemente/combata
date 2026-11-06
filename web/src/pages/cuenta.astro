@@ -1,0 +1,17 @@
+---
+import { url } from '../data/url';
+import Base from '../layouts/Base.astro';
+---
+<Base title="Mi cuenta | Combata" description="Cuenta de cliente de Combata." noindex>
+  <section class="container acc">
+    <h1 class="h-1">Mi cuenta</h1>
+    <p class="lead muted">Las cuentas de cliente estarán disponibles cuando abramos la tienda online. De momento puedes preparar tu carrito sin registrarte.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href={url('/productos/combata-original')}>Ver Combata Original</a>
+      <a class="btn btn-secondary" href={url('/contacto')}>Contacto</a>
+    </div>
+  </section>
+</Base>
+<style>
+  .acc { padding-block: var(--section); display: grid; gap: 1.5rem; justify-items: start; max-width: 48rem; }
+</style>
