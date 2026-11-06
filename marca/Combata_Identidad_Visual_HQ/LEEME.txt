@@ -1,4 +1,4 @@
-COMBATA - IDENTIDAD VISUAL EN ALTA CALIDAD (v1.1)
+COMBATA - IDENTIDAD VISUAL EN ALTA CALIDAD (v1.2)
 =================================================
 
 Formatos
@@ -22,6 +22,6 @@ Morado noche #1A0B3D | Lima #D9FF00 | Rosa #FF2EA6 | Lavanda #B6A4FF | Crema #F5
 
 Nota
 Los archivos se han redibujado en vector a partir de la hoja de marca aprobada
-(Referencia_hoja_de_marca.png). El simbolo (R) se ha redibujado limpio.
+(Referencia_hoja_de_marca.png). Los logos llevan el simbolo TM (marca no registrada).
 Para imprenta en CMYK, validar los colores con prueba de color: el lima y el rosa
 son muy saturados y no se reproducen exactos en CMYK (valorar Pantone).

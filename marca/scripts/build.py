@@ -55,6 +55,15 @@ def reg_glyph(cx, cy, size, color):
     tx = cx - (xmin + xmax) / 2 * k; ty = cy + (ymin + ymax) / 2 * k
     return f'<path transform="translate({tx:.2f} {ty:.2f}) scale({k:.5f} {-k:.5f})" d="{pen.getCommands()}" fill="{color}"/>'
 
+def tm_glyph(left, top, height, color):
+    reg_glyph(0, 0, 1, color)  # ensure font loaded
+    gs = _SORA.getGlyphSet(); g = _SORA.getBestCmap()[0x2122]
+    bp = BoundsPen(gs); gs[g].draw(bp); xmin, ymin, xmax, ymax = bp.bounds
+    pen = SVGPathPen(gs); gs[g].draw(pen)
+    k = height / (ymax - ymin)
+    tx = left - xmin * k; ty = top + ymax * k
+    return f'<path transform="translate({tx:.2f} {ty:.2f}) scale({k:.5f} {-k:.5f})" d="{pen.getCommands()}" fill="{color}"/>'
+
 def disk(r):
     r = max(1, int(round(r)))
     return cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2*r+1, 2*r+1))
@@ -183,7 +192,7 @@ def process(name, folder):
     # crop to content with margin
     ys, xs = np.nonzero(rgba[:, :, 3])
     if reg is not None:
-        ys = np.append(ys, [int(reg[1] - reg[2]), int(reg[1] + reg[2])]); xs = np.append(xs, [int(reg[0] - reg[2]), int(reg[0] + reg[2])])
+        ys = np.append(ys, [int(reg[1] - reg[2]), int(reg[1] + reg[2])]); xs = np.append(xs, [int(reg[0] - reg[2]), int(reg[0] + reg[2] * 1.4)])
     m = S * 2
     y0, y1 = max(ys.min() - m, 0), min(ys.max() + m, rgba.shape[0])
     x0, x1 = max(xs.min() - m, 0), min(xs.max() + m, rgba.shape[1])
@@ -216,9 +225,7 @@ def process(name, folder):
             paths.append(p)
     if reg is not None:
         cx, cy, r = reg[0] - x0c, reg[1] - y0c, reg[2]
-        sw = r * 0.2
-        paths.append(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r - sw/2:.1f}" fill="none" stroke="{HEX["N"]}" stroke-width="{sw:.1f}"/>')
-        paths.append(reg_glyph(cx, cy, r * 1.0, HEX["N"]))
+        paths.append(tm_glyph(cx - r * 0.95, cy - r * 0.95, r * 1.25, HEX["N"]))
     svg = '<svg>\n' + "\n".join(paths) + '\n</svg>\n'
     hh, ww = rgba.shape[:2]
     svg = re.sub(r'<svg[^>]*>', f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {ww} {hh}" width="{ww/S*4:.0f}" height="{hh/S*4:.0f}">\n<title>Combata - {name}</title>', svg, count=1)
