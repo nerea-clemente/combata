@@ -1,0 +1,27 @@
+COMBATA - IDENTIDAD VISUAL EN ALTA CALIDAD (v1.1)
+=================================================
+
+Formatos
+- SVG/  Vectores limpios y escalables sin pérdida (web, imprenta, rotulación).
+        Colores exactos de la paleta, fondo transparente.
+- PNG/  4000 px en el lado largo, fondo transparente, 300 ppp.
+- JPG/  4000 px + margen, fondo blanco (logo blanco/lima sobre morado), calidad 95, 300 ppp.
+
+Carpetas
+01_Logotipos   logo principal, logo bubble, logo blanco y logo lima (para fondos oscuros)
+02_Isotipos    nube + vaso (con y sin gafas) y variaciones de nubes
+03_Avatares    avatares de redes + JPG/03_Avatares/perfil_redes (1080 y 2048 px, cuadrado a sangre)
+04_Pegatinas   vaso, corazon, brillo, onda, rayos (con borde blanco de pegatina)
+05_Elementos   nube amarilla, nube lila, trazos, subrayado
+06_Favicon     favicons + PNG/06_Favicon/tamanos_web (16 a 512 px y favicon.ico)
+07_Paleta      ficha de color con HEX, RGB y CMYK aproximado
+08_Tipografia  muestra de Sora (fuente incluida en Fuente_Sora, licencia OFL libre)
+
+Paleta
+Morado noche #1A0B3D | Lima #D9FF00 | Rosa #FF2EA6 | Lavanda #B6A4FF | Crema #F5F4EE
+
+Nota
+Los archivos se han redibujado en vector a partir de la hoja de marca aprobada
+(Referencia_hoja_de_marca.png). El simbolo (R) se ha redibujado limpio.
+Para imprenta en CMYK, validar los colores con prueba de color: el lima y el rosa
+son muy saturados y no se reproducen exactos en CMYK (valorar Pantone).
