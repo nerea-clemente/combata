@@ -99,7 +99,7 @@ const cart = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
 <style>
   .pdp { background: #F7F2ED; }
   .frame { position: relative; width: calc(625 * var(--u)); margin-inline: auto; }
-  .pdp__frame { height: calc(505 * var(--u)); color: #1A0B3D; }
+  .pdp__frame { height: calc(505 * var(--u)); color: #141414; }
   .crumbs { position: absolute; left: calc(22 * var(--u)); top: calc(16 * var(--u)); }
   .crumbs ol { display: flex; gap: calc(6 * var(--u)); list-style: none; padding: 0; margin: 0; font-size: calc(9.5 * var(--u)); font-weight: 500; }
   .crumbs li + li::before { content: '›'; margin-right: calc(6 * var(--u)); }
@@ -108,8 +108,8 @@ const cart = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
 
   .thumb { position: absolute; left: calc(12 * var(--u)); width: calc(67 * var(--u)); height: calc(70 * var(--u)); padding: 0; border: calc(1.5 * var(--u)) solid transparent; border-radius: calc(9 * var(--u)); overflow: hidden; background: #F3ECE6; }
   .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .thumb[aria-pressed='true'] { border-color: #1A0B3D; }
-  .thumb:hover { border-color: rgba(26,11,61,.4); }
+  .thumb[aria-pressed='true'] { border-color: #141414; }
+  .thumb:hover { border-color: rgba(20,20,20,.4); }
   .main { position: absolute; left: calc(90 * var(--u)); top: calc(43 * var(--u)); width: calc(260 * var(--u)); height: calc(340 * var(--u)); border-radius: calc(14 * var(--u)); overflow: hidden; background: #F2EAE3; display: grid; place-items: center; }
   .main__img { width: 100%; height: 100%; object-fit: cover; }
   .main__img.is-small { width: 60%; height: auto; object-fit: contain; border-radius: calc(10 * var(--u)); }
@@ -125,22 +125,22 @@ const cart = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
   .colours legend { position: absolute; top: 0; }
   .colour { position: absolute; top: calc(26 * var(--u)); cursor: pointer; }
   .colour input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: inherit; }
-  .colour__dot { display: block; width: calc(36 * var(--u)); height: calc(36 * var(--u)); border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(26,11,61,.06); }
-  .colour input:checked + .colour__dot { box-shadow: 0 0 0 calc(2 * var(--u)) #F7F2ED, 0 0 0 calc(3.6 * var(--u)) #1A0B3D; }
-  .colour input:focus-visible + .colour__dot { outline: 2px solid #1A0B3D; outline-offset: calc(5 * var(--u)); }
+  .colour__dot { display: block; width: calc(36 * var(--u)); height: calc(36 * var(--u)); border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(20,20,20,.06); }
+  .colour input:checked + .colour__dot { box-shadow: 0 0 0 calc(2 * var(--u)) #F7F2ED, 0 0 0 calc(3.6 * var(--u)) #141414; }
+  .colour input:focus-visible + .colour__dot { outline: 2px solid #141414; outline-offset: calc(5 * var(--u)); }
   .packs { position: absolute; left: 0; top: calc(252 * var(--u)); width: calc(250 * var(--u)); height: calc(90 * var(--u)); }
   .packs legend { position: absolute; top: 0; }
   .pack { position: absolute; top: calc(21 * var(--u)); height: calc(57 * var(--u)); cursor: pointer; }
   .pack input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: inherit; }
-  .pack__box { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; border: calc(1 * var(--u)) solid rgba(26,11,61,.35); border-radius: calc(9 * var(--u)); background: #FBF8F4; text-align: center; line-height: 1.25; }
+  .pack__box { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; border: calc(1 * var(--u)) solid rgba(20,20,20,.35); border-radius: calc(9 * var(--u)); background: #FBF8F4; text-align: center; line-height: 1.25; }
   .pack__box strong { font-size: calc(11.5 * var(--u)); font-weight: 700; }
   .pack__box small { font-size: calc(8.6 * var(--u)); }
-  .pack input:checked + .pack__box { background: #1A0B3D; color: #fff; border-color: #1A0B3D; }
-  .pack input:focus-visible + .pack__box { outline: 2px solid #1A0B3D; outline-offset: calc(3 * var(--u)); }
+  .pack input:checked + .pack__box { background: #141414; color: #fff; border-color: #141414; }
+  .pack input:focus-visible + .pack__box { outline: 2px solid #141414; outline-offset: calc(3 * var(--u)); }
   .err { position: absolute; top: calc(388 * var(--u)); font-size: calc(10 * var(--u)); color: var(--color-error); margin: 0; }
   .add {
     position: absolute; left: 0; top: calc(348 * var(--u)); width: calc(245 * var(--u)); height: calc(36 * var(--u)); border: 0; border-radius: 999px;
-    background: #DFFF1A; color: #1A0B3D; font-size: calc(12.5 * var(--u)); font-weight: 700; display: flex; align-items: center; justify-content: center; gap: calc(7 * var(--u));
+    background: #DFFF1A; color: #141414; font-size: calc(12.5 * var(--u)); font-weight: 700; display: flex; align-items: center; justify-content: center; gap: calc(7 * var(--u));
   }
   .add:hover { background: #EAFF5C; }
   .add :global(svg) { width: calc(16 * var(--u)); height: calc(16 * var(--u)); }
@@ -167,7 +167,7 @@ const cart = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
     .colours { display: flex; flex-wrap: wrap; gap: 12px; }
     legend { font-size: 15px; margin-bottom: 10px; position: static !important; width: 100%; }
     .colour__dot { width: 44px; height: 44px; }
-    .colour input:checked + .colour__dot { box-shadow: 0 0 0 3px #F7F2ED, 0 0 0 5px #1A0B3D; }
+    .colour input:checked + .colour__dot { box-shadow: 0 0 0 3px #F7F2ED, 0 0 0 5px #141414; }
     .packs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .pack { width: auto !important; height: 66px; }
     .pack__box { border-radius: 12px; border-width: 1.5px; }

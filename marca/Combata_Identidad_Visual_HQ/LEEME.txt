@@ -18,7 +18,7 @@ Carpetas
 08_Tipografia  muestra de Sora (fuente incluida en Fuente_Sora, licencia OFL libre)
 
 Paleta
-Morado noche #1A0B3D | Lima #D9FF00 | Rosa #FF2EA6 | Lavanda #B6A4FF | Crema #F5F4EE
+Morado noche #1A0B3D | Negro #141414 | Morado profundo #3A1256 | Lima #D9FF00 | Rosa #FF2EA6 | Lavanda #B6A4FF | Crema #F5F4EE
 
 Nota
 Los archivos se han redibujado en vector a partir de la hoja de marca aprobada

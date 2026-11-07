@@ -59,7 +59,7 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   <section class="custom" aria-labelledby="custom-title">
     <svg class="custom__bg" viewBox="0 0 558 200" preserveAspectRatio="none" aria-hidden="true">
         <defs>
-          <linearGradient id="cg" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#1E0730"/><stop offset=".45" stop-color="#26072F"/><stop offset=".585" stop-color="#2B0735"/><stop offset=".78" stop-color="#2F0837"/><stop offset=".88" stop-color="#34093E"/><stop offset="1" stop-color="#39083F"/></linearGradient>
+          <linearGradient id="cg" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#151515"/><stop offset="1" stop-color="#151515"/></linearGradient>
         </defs>
         <path d="M0 38 Q0 28 12 28 C 110 24 190 33 262 29 C 330 25 385 12 452 9 C 500 7 538 7 550 11 Q558 14 558 24 V200 H0 Z" fill="url(#cg)"/>
       </svg>
@@ -84,13 +84,13 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   }
   .pill :global(svg) { width: calc(12 * var(--u)); height: calc(12 * var(--u)); }
   .pill:active { transform: translateY(1px); }
-  .pill--lime { background: #DFFF1A; color: #1A0B3D; }
+  .pill--lime { background: #DFFF1A; color: #141414; }
   .pill--lime:hover { background: #EAFF5C; }
   .pill--line { color: #fff; border: calc(1.4 * var(--u)) solid rgba(255,255,255,.9); }
-  .pill--line:hover { background: #fff; color: #1A0B3D; }
+  .pill--line:hover { background: #fff; color: #141414; }
 
   /* HERO 558 x 375 */
-  .hero { background: linear-gradient(100deg, #170624 0%, #1F072D 35%, #2C0839 70%, #33093F 100%); overflow: hidden; }
+  .hero { background: #151515; overflow: hidden; }
   .hero__frame { height: calc(375 * var(--u)); }
   .hero__title { position: absolute; left: calc(34 * var(--u)); top: calc(51 * var(--u)); margin: 0; font-size: calc(49 * var(--u)); line-height: calc(50 * var(--u)); font-weight: 760; letter-spacing: -.035em; color: #fff; z-index: 2; }
   .hero__line { position: absolute; left: calc(52 * var(--u)); top: calc(148 * var(--u)); width: calc(180 * var(--u)); height: calc(28 * var(--u)); z-index: 2; overflow: visible; }
@@ -100,14 +100,14 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .hero__b2 { left: calc(185 * var(--u)); top: calc(284 * var(--u)); width: calc(122 * var(--u)); z-index: 2; }
   .hero__img { position: absolute; right: calc(8 * var(--u)); top: calc(-1 * var(--u)); width: calc(244 * var(--u)); height: calc(376 * var(--u)); object-fit: cover; z-index: 1; }
   .hero__ext { position: absolute; top: calc(-1 * var(--u)); height: calc(376 * var(--u)); pointer-events: none; }
-  .hero__ext--l { right: calc(calc(252 * var(--u)) - 1px); width: calc(150 * var(--u)); background: linear-gradient(180deg, #250931 0%, #2D0834 25%, #360C3C 50%, #360A3D 75%, #2E0736 100%);
+  .hero__ext--l { right: calc(calc(252 * var(--u)) - 1px); width: calc(150 * var(--u)); background: #151515;
     -webkit-mask-image: linear-gradient(to right, transparent, #000); mask-image: linear-gradient(to right, transparent, #000); }
-  .hero__ext--r { left: calc(100% - calc(8 * var(--u)) - 1px); width: 50vw; background: linear-gradient(180deg, #350B3B 0%, #3F0943 25%, #3F0943 50%, #38093D 75%, #2B0733 100%); }
+  .hero__ext--r { left: calc(100% - calc(8 * var(--u)) - 1px); width: 50vw; background: #151515; }
 
   /* BENEFICIOS 558 x 157 */
   .benefits { background: #F6F2EE; }
   .benefits__frame { height: calc(157 * var(--u)); }
-  .ben { position: absolute; top: calc(20 * var(--u)); width: calc(180 * var(--u)); transform: translateX(-50%); text-align: center; color: #1A0B3D; }
+  .ben { position: absolute; top: calc(20 * var(--u)); width: calc(180 * var(--u)); transform: translateX(-50%); text-align: center; color: #141414; }
   .ben--1 { left: calc(109 * var(--u)); } .ben--2 { left: calc(286 * var(--u)); } .ben--3 { left: calc(459 * var(--u)); }
   .ben svg { width: calc(37 * var(--u)); height: calc(37 * var(--u)); display: block; margin: 0 auto; }
   .ben h2 { margin: calc(8 * var(--u)) 0 0; font-size: calc(15 * var(--u)); line-height: calc(17 * var(--u)); font-weight: 700; letter-spacing: -.02em; }
@@ -118,8 +118,8 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .discover__frame { height: calc(214 * var(--u)); }
   .discover__img { position: absolute; left: calc(10 * var(--u)); top: calc(3 * var(--u)); width: calc(300 * var(--u)); height: calc(222 * var(--u)); object-fit: cover;
     -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000 72%, transparent 100%); mask-image: radial-gradient(70% 70% at 50% 50%, #000 72%, transparent 100%); }
-  .discover__title { position: absolute; left: calc(321 * var(--u)); top: calc(36 * var(--u)); margin: 0; font-size: calc(32 * var(--u)); line-height: calc(33 * var(--u)); font-weight: 760; letter-spacing: -.035em; color: #1A0B3D; }
-  .discover__text { position: absolute; left: calc(322 * var(--u)); top: calc(112 * var(--u)); margin: 0; font-size: calc(14.6 * var(--u)); line-height: calc(19 * var(--u)); color: #1A0B3D; font-weight: 500; }
+  .discover__title { position: absolute; left: calc(321 * var(--u)); top: calc(36 * var(--u)); margin: 0; font-size: calc(32 * var(--u)); line-height: calc(33 * var(--u)); font-weight: 760; letter-spacing: -.035em; color: #141414; }
+  .discover__text { position: absolute; left: calc(322 * var(--u)); top: calc(112 * var(--u)); margin: 0; font-size: calc(14.6 * var(--u)); line-height: calc(19 * var(--u)); color: #141414; font-weight: 500; }
   .discover__btn { left: calc(322 * var(--u)); top: calc(169 * var(--u)); width: calc(149 * var(--u)); height: calc(33 * var(--u)); }
 
   /* CUSTOM 558 x 198 (incluye la onda) */
@@ -133,15 +133,15 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .cext { position: absolute; pointer-events: none; z-index: 0; }
   .custom__title, .custom__text, .custom__btn { z-index: 2; }
   .cext--t { display: none; }
-  .cext--l { right: calc(calc(236 * var(--u)) - 1px); bottom: 0; width: calc(120 * var(--u)); height: calc(166 * var(--u)); background: linear-gradient(180deg, #290835 0%, #2E0736 25%, #310A39 50%, #330939 75%, #330939 100%);
+  .cext--l { right: calc(calc(236 * var(--u)) - 1px); bottom: 0; width: calc(120 * var(--u)); height: calc(166 * var(--u)); background: #151515;
     -webkit-mask-image: linear-gradient(to right, transparent, #000); mask-image: linear-gradient(to right, transparent, #000); }
-  .cext--r { left: calc(100% - calc(8 * var(--u)) - 1px); bottom: 0; width: 50vw; height: calc(166 * var(--u)); background: linear-gradient(180deg, #3A0941 0%, #3B0A42 25%, #3B0840 50%, #35093C 75%, #2F0835 100%); }
+  .cext--r { left: calc(100% - calc(8 * var(--u)) - 1px); bottom: 0; width: 50vw; height: calc(166 * var(--u)); background: #151515; }
 
 
   /* ===== MÓVIL (diseño de teléfono, 244 de ancho) ===== */
   @media (max-width: 760px) {
     .frame { width: 100%; }
-    .hero { background: linear-gradient(160deg, #1D0730 0%, #2A0838 60%, #300A3E 100%); }
+    .hero { background: #151515; }
     .hero__frame { height: calc(387 * var(--m)); }
     .hero__title { left: calc(14 * var(--m)); top: calc(25 * var(--m)); font-size: calc(36.5 * var(--m)); line-height: calc(37 * var(--m)); }
     .hero__line { left: calc(28 * var(--m)); top: calc(103 * var(--m)); width: calc(152 * var(--m)); height: calc(24 * var(--m)); }
@@ -170,7 +170,7 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     .discover__text { font-size: 18px; line-height: 1.35; }
     .discover__btn { width: max-content; padding: 0 22px; height: 46px; font-size: 15px; }
 
-    .custom { background: linear-gradient(90deg, #1E0730 0%, #2B0735 60%, #39083F 100%); position: relative; }
+    .custom { background: #151515; position: relative; }
     .custom__frame { display: grid; gap: 14px; padding: 30px var(--gutter) 0; }
     .custom__bg { inset: -40px 0 auto 0; height: 80px; width: 100%; }
     .custom__title, .custom__text, .custom__btn, .custom__img { position: static; }
@@ -179,7 +179,7 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     .custom__btn { width: max-content; padding: 0 22px; height: 46px; font-size: 15px; position: relative; }
     .custom__img { width: calc(100% + 2 * var(--gutter)); max-width: none; height: auto; margin: 0 calc(var(--gutter) * -1); justify-self: stretch; }
     .cext--l, .cext--r { display: none; }
-    .cext--t { display: block; position: relative; height: 40px; margin: 10px calc(var(--gutter) * -1) -14px; background: linear-gradient(90deg, #2B0735 0%, #2F0837 50%, #34093E 75%, #39083F 100%);
+    .cext--t { display: block; position: relative; height: 40px; margin: 10px calc(var(--gutter) * -1) -14px; background: #151515;
       -webkit-mask-image: linear-gradient(to bottom, transparent, #000); mask-image: linear-gradient(to bottom, transparent, #000); }
     .discover .pill :global(svg), .custom .pill :global(svg) { width: 15px; height: 15px; }
   }

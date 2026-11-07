@@ -1,4 +1,6 @@
 Morado noche: #1A0B3D  RGB (26, 11, 61)  CMYK aprox. (57, 82, 0, 76)
+Negro: #141414  RGB (20, 20, 20)  CMYK aprox. (0, 0, 0, 92)
+Morado profundo: #3A1256  RGB (58, 18, 86)  CMYK aprox. (33, 79, 0, 66)
 Lima: #D9FF00  RGB (217, 255, 0)  CMYK aprox. (15, 0, 100, 0)
 Rosa: #FF2EA6  RGB (255, 46, 166)  CMYK aprox. (0, 82, 35, 0)
 Lavanda: #B6A4FF  RGB (182, 164, 255)  CMYK aprox. (29, 36, 0, 0)
