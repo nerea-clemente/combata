@@ -18,6 +18,8 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       <p class="hero__text"><span class="d">El protector reutilizable para tu bebida.<br />Menos derrames, más tranquilidad<br />y toda la fiesta por delante.</span><span class="mo">El protector reutilizable<br />para tu bebida.</span></p>
       <a class="pill pill--lime hero__b1" href={url(product.href)}>Comprar ahora <Fragment set:html={arrow} /></a>
       <a class="pill pill--line hero__b2" href={url('/custom')}>Personalizar <Fragment set:html={arrow} /></a>
+      <div class="hero__ext hero__ext--l" aria-hidden="true"></div>
+      <div class="hero__ext hero__ext--r" aria-hidden="true"></div>
       <img class="hero__img" src={url('/img/hero_vaso.jpg')} alt="Vaso con una tapa Combata lima y pajita" width="756" height="1128" fetchpriority="high" />
     </div>
   </section>
@@ -57,7 +59,7 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   <section class="custom" aria-labelledby="custom-title">
     <svg class="custom__bg" viewBox="0 0 558 200" preserveAspectRatio="none" aria-hidden="true">
         <defs>
-          <linearGradient id="cg" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#1E0730"/><stop offset=".6" stop-color="#28083A"/><stop offset="1" stop-color="#2F093F"/></linearGradient>
+          <linearGradient id="cg" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#1E0730"/><stop offset=".45" stop-color="#26072F"/><stop offset=".585" stop-color="#2B0735"/><stop offset=".78" stop-color="#2F0837"/><stop offset=".88" stop-color="#34093E"/><stop offset="1" stop-color="#39083F"/></linearGradient>
         </defs>
         <path d="M0 38 Q0 28 12 28 C 110 24 190 33 262 29 C 330 25 385 12 452 9 C 500 7 538 7 550 11 Q558 14 558 24 V200 H0 Z" fill="url(#cg)"/>
       </svg>
@@ -65,6 +67,9 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       <h2 id="custom-title" class="custom__title">Combata Custom</h2>
       <p class="custom__text">Personalízalo para tu evento,<br />marca o celebración.</p>
       <a class="pill pill--line custom__btn" href={url('/custom#presupuesto')}>Solicitar presupuesto <Fragment set:html={arrow} /></a>
+      <div class="cext cext--t" aria-hidden="true"></div>
+      <div class="cext cext--l" aria-hidden="true"></div>
+      <div class="cext cext--r" aria-hidden="true"></div>
       <img class="custom__img" src={url('/img/custom_vaso.jpg')} alt="Vaso con tapa Combata lavanda personalizada con el texto «Tu logo»" width="684" height="498" loading="lazy" />
     </div>
   </section>
@@ -89,14 +94,15 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .hero__frame { height: calc(375 * var(--u)); }
   .hero__title { position: absolute; left: calc(34 * var(--u)); top: calc(51 * var(--u)); margin: 0; font-size: calc(49 * var(--u)); line-height: calc(50 * var(--u)); font-weight: 760; letter-spacing: -.035em; color: #fff; z-index: 2; }
   .hero__line { position: absolute; left: calc(52 * var(--u)); top: calc(148 * var(--u)); width: calc(180 * var(--u)); height: calc(28 * var(--u)); z-index: 2; overflow: visible; }
-  .hero__text { position: absolute; left: calc(34 * var(--u)); top: calc(196 * var(--u)); width: calc(290 * var(--u)); margin: 0; font-size: calc(14.6 * var(--u)); line-height: calc(21 * var(--u)); color: rgba(255,255,255,.93); z-index: 2; }
+  .hero__text { position: absolute; left: calc(34 * var(--u)); top: calc(196 * var(--u)); width: calc(290 * var(--u)); margin: 0; font-size: calc(14.2 * var(--u)); line-height: calc(21 * var(--u)); color: rgba(255,255,255,.93); z-index: 2; }
   .hero__text .mo { display: none; }
   .hero__b1 { left: calc(34 * var(--u)); top: calc(284 * var(--u)); width: calc(139 * var(--u)); z-index: 2; }
   .hero__b2 { left: calc(185 * var(--u)); top: calc(284 * var(--u)); width: calc(122 * var(--u)); z-index: 2; }
-  .hero__img {
-    position: absolute; right: calc(8 * var(--u)); top: calc(-1 * var(--u)); width: calc(244 * var(--u)); height: calc(376 * var(--u)); object-fit: cover;
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 12%); mask-image: linear-gradient(to right, transparent 0, #000 12%);
-  }
+  .hero__img { position: absolute; right: calc(8 * var(--u)); top: calc(-1 * var(--u)); width: calc(244 * var(--u)); height: calc(376 * var(--u)); object-fit: cover; z-index: 1; }
+  .hero__ext { position: absolute; top: calc(-1 * var(--u)); height: calc(376 * var(--u)); pointer-events: none; }
+  .hero__ext--l { right: calc(calc(252 * var(--u)) - 1px); width: calc(150 * var(--u)); background: linear-gradient(180deg, #250931 0%, #2D0834 25%, #360C3C 50%, #360A3D 75%, #2E0736 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000); mask-image: linear-gradient(to right, transparent, #000); }
+  .hero__ext--r { left: calc(100% - calc(8 * var(--u)) - 1px); width: 50vw; background: linear-gradient(180deg, #350B3B 0%, #3F0943 25%, #3F0943 50%, #38093D 75%, #2B0733 100%); }
 
   /* BENEFICIOS 558 x 157 */
   .benefits { background: #F6F2EE; }
@@ -123,10 +129,13 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .custom__title { position: absolute; left: calc(35 * var(--u)); top: calc(55 * var(--u)); margin: 0; font-size: calc(31 * var(--u)); line-height: calc(34 * var(--u)); font-weight: 760; letter-spacing: -.03em; color: #fff; }
   .custom__text { position: absolute; left: calc(35 * var(--u)); top: calc(91 * var(--u)); margin: 0; font-size: calc(14.2 * var(--u)); line-height: calc(19 * var(--u)); color: rgba(255,255,255,.92); }
   .custom__btn { left: calc(35 * var(--u)); top: calc(142 * var(--u)); width: calc(198 * var(--u)); }
-  .custom__img { position: absolute; right: calc(8 * var(--u)); bottom: 0; width: calc(228 * var(--u)); height: calc(166 * var(--u)); object-fit: cover;
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16%), linear-gradient(to bottom, transparent 0, #000 14%);
-    -webkit-mask-composite: source-in;
-    mask-image: linear-gradient(to right, transparent 0, #000 16%), linear-gradient(to bottom, transparent 0, #000 14%); mask-composite: intersect; }
+  .custom__img { position: absolute; right: calc(8 * var(--u)); bottom: 0; width: calc(228 * var(--u)); height: calc(166 * var(--u)); object-fit: cover; z-index: 1; }
+  .cext { position: absolute; pointer-events: none; z-index: 0; }
+  .custom__title, .custom__text, .custom__btn { z-index: 2; }
+  .cext--t { display: none; }
+  .cext--l { right: calc(calc(236 * var(--u)) - 1px); bottom: 0; width: calc(120 * var(--u)); height: calc(166 * var(--u)); background: linear-gradient(180deg, #290835 0%, #2E0736 25%, #310A39 50%, #330939 75%, #330939 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000); mask-image: linear-gradient(to right, transparent, #000); }
+  .cext--r { left: calc(100% - calc(8 * var(--u)) - 1px); bottom: 0; width: 50vw; height: calc(166 * var(--u)); background: linear-gradient(180deg, #3A0941 0%, #3B0A42 25%, #3B0840 50%, #35093C 75%, #2F0835 100%); }
 
 
   /* ===== MÓVIL (diseño de teléfono, 244 de ancho) ===== */
@@ -143,7 +152,9 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     .pill--line { border-width: calc(1.2 * var(--m)); }
     .hero__b1 { left: calc(14 * var(--m)); top: calc(207 * var(--m)); width: calc(133 * var(--m)); }
     .hero__b2 { left: calc(14 * var(--m)); top: calc(256 * var(--m)); width: calc(121 * var(--m)); }
-    .hero__img { right: auto; left: calc(124 * var(--m)); top: calc(126 * var(--m)); width: calc(167 * var(--m)); height: calc(257 * var(--m)); -webkit-mask-image: linear-gradient(to right, transparent 0, #000 10%); mask-image: linear-gradient(to right, transparent 0, #000 10%); }
+    .hero__img { right: auto; left: calc(124 * var(--m)); top: calc(126 * var(--m)); width: calc(167 * var(--m)); height: calc(257 * var(--m)); }
+    .hero__ext--l { right: auto; left: calc(calc(64 * var(--m)) + 1px); width: calc(60 * var(--m)); top: calc(126 * var(--m)); height: calc(257 * var(--m)); }
+    .hero__ext--r { display: none; }
 
     .benefits__frame, .discover__frame, .custom__frame { height: auto; }
     .benefits__frame { display: grid; gap: 28px; padding: 36px var(--gutter); }
@@ -159,14 +170,17 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     .discover__text { font-size: 18px; line-height: 1.35; }
     .discover__btn { width: max-content; padding: 0 22px; height: 46px; font-size: 15px; }
 
-    .custom { background: #22072F; position: relative; }
+    .custom { background: linear-gradient(90deg, #1E0730 0%, #2B0735 60%, #39083F 100%); position: relative; }
     .custom__frame { display: grid; gap: 14px; padding: 30px var(--gutter) 0; }
     .custom__bg { inset: -40px 0 auto 0; height: 80px; width: 100%; }
     .custom__title, .custom__text, .custom__btn, .custom__img { position: static; }
     .custom__title { font-size: 36px; line-height: 1.05; position: relative; }
     .custom__text { font-size: 17px; line-height: 1.4; position: relative; }
     .custom__btn { width: max-content; padding: 0 22px; height: 46px; font-size: 15px; position: relative; }
-    .custom__img { width: 100%; height: auto; margin-top: 10px; justify-self: end; }
+    .custom__img { width: calc(100% + 2 * var(--gutter)); max-width: none; height: auto; margin: 0 calc(var(--gutter) * -1); justify-self: stretch; }
+    .cext--l, .cext--r { display: none; }
+    .cext--t { display: block; position: relative; height: 40px; margin: 10px calc(var(--gutter) * -1) -14px; background: linear-gradient(90deg, #2B0735 0%, #2F0837 50%, #34093E 75%, #39083F 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000); mask-image: linear-gradient(to bottom, transparent, #000); }
     .discover .pill :global(svg), .custom .pill :global(svg) { width: 15px; height: 15px; }
   }
 </style>
